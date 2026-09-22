@@ -9,7 +9,7 @@ const WORLDS = [
 const LEVELS = [
  {title:'Yanımda Bir Yer',w:0,actor:'sen',mechanic:'learn',seed:2,
  goal:'Sıcak ışığı takip et. Yön tuşlarıyla yürü, ↑ ile zıpla.',
- intro:[['ANLATICI','Ankara, Koru. Dünya henüz iki kişilik.'],['DAMLA','Dostuuum… Tavuk Dünyası’na mı gitsek?'],['SEN','Senin Kremantar’ın şu an bizi beklediğini hissediyorum.'],['DAMLA','Sen de Barbeküs diyeceksin. Ama gidince yine menüye bakarsın, Aptullah.'],['SEN','Tabii bakarım. Belki bu sefer…'],['ANLATICI','Damla gülerek sana dönüyor. Vereceği cevabı duyamadan ayaklarınızın altındaki yol bir kâğıt gibi yırtılıyor.'],['SEN','Damla? Az önce buradaydın.']],
+ intro:[['ANLATICI','Ankara, Koru. Dünya henüz iki kişilik.'],['DAMLA','Dostuuum… Tavuk Dünyası’na mı gitsek?'],['SEN','Senin Kremantar’ın şu an bizi beklediğini hissediyorum.'],['DAMLA','Bay Aptullah çok bilmiş. Sen de Barbeküs diyeceksin; ama gidince yine menüye bakarsın.'],['SEN','Tabii bakarım. Belki bu sefer…'],['ANLATICI','Damla gülerek sana dönüyor. Vereceği cevabı duyamadan ayaklarınızın altındaki yol bir kâğıt gibi yırtılıyor.'],['SEN','Damla? Az önce buradaydın.']],
  signs:[['SEN','Bankın ışığı hâlâ sıcak. Belki bu taraftan gitmiştir.'],['SEN','Bu parkta normalde bu kadar boşluk yoktu. Belediyeye yazılacak şeyler listesi büyüyor.'],['SEN','Bir ışık daha. Tamam, dostuuum. Geliyorum.']],
  outro:[['ANLATICI','Bir anlığına karşı yolda bir gölge beliriyor. Yaklaşınca yalnızca rüzgâr kalıyor.'],['SEN','Bekle. Bir yolunu bulacağım.']],
  memory:['Bankın sağ tarafı','İkiniz de öbürünün yerini ezbere biliyorsunuz. Bazen yakınlık, sormadan biraz yana kaymak.']},
@@ -78,13 +78,13 @@ const LEVELS = [
  intro:[['SEN','İki kez geldik. Ben onları tek bir akşam sanmışım.'],['ANLATICI','Anılar bozulmadı. Yalnızca yolları birbirine karıştı.']],
  signs:[['SEN','Birinde konuşmak kolaydı.'],['SEN','Diğerinde de gülüyorduk. Bu, her şeyin aynı olduğu anlamına gelmiyordu.'],['MEKANİZMA','Kapıyı kapatmak karşı çıkışı açar. Bağlantı aynı anda kesilir.']],
  outro:[['ANLATICI','Masa yerinde kalıyor. Bir şeyi hatırlamak, o anda yaşamaya devam etmek zorunda olmak değil.'],['SEN','Hesap masada kalmış. Bazı şeyleri toplayıp kalkmayı öğrenmek gerekiyor.']],
- memory:['Sakin bir an','Bir şiiri beraber dinlediğiniz alışkanlık burada bir kitap ayracıyla hatırlanıyor. Şiir seçilmediği için alıntı yok.']},
+ memory:['Sakin bir an','Şiir bittiğinde biriniz hemen konuşmazdı. Bu oyun için hayal edilen ayracın kıvrımında, o küçük bekleyiş var.']},
  {title:'Bütün Yollar Buraya',w:4,actor:'sen',mechanic:'mixed',seed:49,
  goal:'Rayları, kırılgan iskeleleri ve zaman yollarını birlikte kullan.',
  intro:[['ANLATICI','Koru’nun öte yanı. Bir tramvay durağında yağmur, bir park yolunda restoran ışığı.'],['SEN','Bütün yollar buraya çıktı. Senin yolun da buradan geçiyor.']],
  signs:[['SEN','Bu feneri sen yaktın.'],['SEN','Bu notu ben çok önce buldum, sen çok sonra yazdın.'],['SEN','Geçit açık kaldıkça aynı anılara geri dönüyorsun. Artık görüyorum.']],
  outro:[['DAMLA','Çıkışın ışığını görüyorum. Her yaklaştığımda yeniden parka dönüyorum.'],['SEN','Çünkü kapı açık. Küçük mekanizmalarda olduğu gibi.']],
- memory:['Mırıldanmanın hatırası','“Şamdanları Donanınca”yı söylemeyi sevdiği hatırlanıyor. Duyduğun özgün tema o şarkının kaydı veya melodisi değil.']},
+ memory:['Mırıldanmanın hatırası','“Şamdanları Donanınca”yı söylemeyi sevdiği hatırlanıyor. Bu anıda şarkının kaydı veya melodisi kullanılmıyor.']},
  {title:'Son Geçit',w:4,actor:'sen',mechanic:'relay',seed:53,
  goal:'İlk halkayı sen kur. Sonraki iki halkayı Damla’yla tamamla.',
  intro:[['SEN','Kapıyı kapatan kişi bendim. Henüz olmadığım ben.'],['ANLATICI','Geçit iki yolun son bağlantısı. Açık kaldıkça Damla çıkış yerine aynı anılara dönüyor.'],['SEN','Kapatırsam onun yolu açılacak. Bizim aramızdaki yol bitecek.']],
@@ -95,8 +95,16 @@ const LEVELS = [
  goal:'Üç halkayı tamamla. Son geçide dokunmadan önce neyin biteceğini hatırla.',
  intro:[['ANLATICI','Bu bir insana değil, birlikte hayal edilen geleceğe veda. Damla yaşıyor. Sen de buradan çıkacaksın.'],['SEN','Bir kapıyı açık tutarak bir insanı yakınımda tutamam.']],
  signs:[['SEN','Bir: Yaşadığımız şeyler olduğu gibi kalacak.'],['SEN','İki: Sen kendi yoluna devam edebileceksin.'],['SEN','Üç: Ben de çıkacağım. Yollarımız birleşmese de.']],
- outro:[['ANLATICI','Geçit kapanıyor. Damla’nın önündeki döngü çözülüyor. Işık, bir insanın kendi yoluna çıkmasına yetecek kadar açık.'],['ANLATICI','Koru. İlk akşam. Bu kez konuşma yarıda kalmıyor.'],['DAMLA','Dostuuum… Tavuk Dünyası’na mı gitsek?'],['SEN','Senin Kremantar’ın şu an bizi beklediğini hissediyorum.'],['DAMLA','Sen de Barbeküs diyeceksin. Ama gidince yine menüye bakarsın, Aptullah.'],['SEN','Tabii bakarım. Belki bu sefer…'],['DAMLA','Bu sefer de Barbeküs. Hadi kalk, dostuuum.'],['SEN','Tamam. Ama menüye bir göz atarım.'],['ANLATICI','Gülüyorsunuz. Dünya o an için iki kişilik.'],['ANLATICI','Daha sonraki bir akşam. Aynı bank. Bu kez yanında boş bir yer var. Parkın sesi devam ediyor.']],
+ outro:[['ANLATICI','Geçit kapanıyor. Damla’nın önündeki döngü çözülüyor. Işık, bir insanın kendi yoluna çıkmasına yetecek kadar açık.'],['ANLATICI','Koru. İlk akşam. Bu kez konuşma yarıda kalmıyor.'],['DAMLA','Dostuuum… Tavuk Dünyası’na mı gitsek?'],['SEN','Senin Kremantar’ın şu an bizi beklediğini hissediyorum.'],['DAMLA','Bay Aptullah çok bilmiş. Sen de Barbeküs diyeceksin; ama gidince yine menüye bakarsın.'],['SEN','Tabii bakarım. Belki bu sefer…'],['DAMLA','Bu sefer de Barbeküs. Hadi kalk, dostuuum.'],['SEN','Tamam. Ama menüye bir göz atarım.'],['ANLATICI','Gülüyorsunuz. Dünya o an için iki kişilik.'],['ANLATICI','Daha sonraki bir akşam. Aynı bank. Bu kez yanında boş bir yer var. Parkın sesi devam ediyor.']],
  memory:['Kalan yer','Birlikte gülmüş olmanız, yollar ayrıldığında hiç olmamış sayılmıyor.']}
 ];
-if(typeof module!=='undefined')module.exports={LEVELS,WORLDS};
 
+// Brief attributed excerpts; all following character replies are original dialogue.
+LEVELS[2].outro.push(['İSMET ÖZEL · AMENTÜ','“kendi tehlikesi peşinden gider insan”'],['SEN','Korktuğum yere doğru yürüyorum. Bu kez yolun kolay olmasını beklemeyeceğim.']);
+LEVELS[10].outro.push(['İSMET ÖZEL · BİR YUSUF MASALI','“kavuşmak denir mi hep bir arada bulunmaya”'],['SEN','Aynı masada oturmak kolay. Birbirimizin hangi akşamda kaldığını anlamak daha zor.']);
+LEVELS[11].outro.push(['İSMET ÖZEL · MÜNACAAT','“gençtim ve ben neden hata payı yok diyordum hayatımda”'],['SEN','Her sessizliğin doğru cevabını bulmak zorundaymışım gibi davranmışım. Belki bazen dinlemem yeterdi.']);
+LEVELS[13].outro.push(['İSMET ÖZEL · SEVGİLİME BİR KEFEN','“yüreğimin palamarlarını çözüyor aya karşı”'],['SEN','Bende kalan, seni burada tutan bir bağ olmasın. Son düğümü çözmeye gidiyorum.']);
+LEVELS[0].signs[0]=['SEN','Yolun üstüne düşmüş ağacı çevirebilirsem köprü olur. Belediye işi bize kaldı, dostuuum.'];
+LEVELS[4].signs[2]=['SEN','İki akşamın saati hizalandı. Aynı yere varmak, aynı zamanda varmak değilmiş.'];
+LEVELS[6].signs[0]=['SEN','Savağı açtım. Su çekilince fenerlerin gösterdiği iskele ortaya çıktı. Biri yolu önceden hazırlamış.'];
+if(typeof module!=='undefined')module.exports={LEVELS,WORLDS};

@@ -1,7 +1,7 @@
 'use strict';
 const RoadMusic=(()=>{
  const tracks={naval:{file:'assets/music/naval.mp3',title:'Yann Tiersen · Naval'},rocket:{file:'assets/music/the-rocket-builder.mp3',title:'Jóhann Jóhannsson · The Rocket Builder'},daylight:{file:'assets/music/on-the-nature-of-daylight.mp3',title:'Max Richter · On the Nature of Daylight'}};
- const chapters=['naval',null,'naval','rocket',null,'rocket','rocket','naval','rocket','naval','daylight',null,'rocket','daylight','daylight'];
+ const chapters=['naval','rocket','naval','rocket','daylight','rocket','rocket','naval','rocket','naval','daylight','daylight','rocket','daylight','daylight'];
  function create({element,context,onBlocked=()=>{},onError=()=>{}}){
   let current=null,active=false,attempt=0,pending=false,blocked=false,failed=false,node=null,source=null,lastVolume=-1;
   element.loop=true;element.preload='none';element.setAttribute('playsinline','');
@@ -23,4 +23,3 @@ const RoadMusic=(()=>{
  return {tracks,chapters,create};
 })();
 if(typeof module!=='undefined')module.exports=RoadMusic;
-

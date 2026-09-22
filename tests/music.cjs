@@ -26,3 +26,4 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
  console.log('PASS: three recordings, lazy loading, loop, chapter switch, volume/ducking, pause/resume without rewind, mute, autoplay rejection/retry, media error, late-promise race');
 })();
 
+assert.equal(chapters.length,15);assert.ok(chapters.every(k=>tracks[k]));

@@ -1,41 +1,29 @@
-const assert=require('node:assert/strict');
-const E=require('../engine.js');
-const {LEVELS}=require('../story.js');
-let leapCount=0;
-function reachable(w,a,b,phase){
- for(const startOffset of [25,15,5,-5])for(const launchDelay of [0,.08,.16]){
-  const copy=structuredClone(w);const source=copy.platforms.find(p=>p.id===a.id),target=copy.platforms.find(p=>p.id===b.id);
-  const state={time:phase,phase:b.phase||0,gates:{0:true,1:true,2:true},assist:false};
-  for(const p of copy.platforms){if(p.type==='moving'){p.x=p.baseX+(p.axis==='x'?Math.sin(state.time*1.25+p.offset)*p.amplitude:0);p.y=p.baseY+(p.axis==='y'?Math.sin(state.time*1.15+p.offset)*25:0);}}
-  const p=E.createPlayer(source.x+source.w-26-startOffset,source.y-58);p.ground=source.id;
-  let launched=false;
-  for(let n=0;n<180;n++){
-   const dt=1/120;state.time+=dt;const goJump=!launched&&n*dt>=launchDelay;if(goJump)launched=true;
-   const right=p.x+13<target.x+target.w*.6;
-   const dead=E.step(copy,p,{right,left:false,jump:launched,jumpPressed:goJump},state,dt);
-   if(dead)break;if(p.ground===target.id)return true;
+const assert=require('node:assert/strict'),E=require('../engine.js'),{LEVELS}=require('../story.js');
+let transfers=0;const failed=[];
+function makeState(w,time=0){return {time,phase:0,tasks:Object.fromEntries(w.required.map(k=>[k,true])),assist:false};}
+function reachable(w,a,b){
+ for(const time of [0,.7,1.5,2.5,3.5,4.5,5.5])for(const startOffset of [30,15,2,-5])for(const launchDelay of [0,.07,.14]){
+  const copy=structuredClone(w);copy.hazards=[];const source=copy.platforms[a.id],target=copy.platforms[b.id],state=makeState(copy,time);state.phase=target.type==='phase'?target.phase:source.phase||0;
+  E.step(copy,E.createPlayer(20,-500),{},state,1/120);
+  const p=E.createPlayer(b.secret?target.x:source.x+source.w-26-startOffset,source.y-58);p.ground=source.id;let launched=false;
+  for(let n=0;n<250;n++){
+   state.time+=1/120;const goJump=!launched&&n/120>=launchDelay;if(goJump)launched=true;
+   const targetX=target.x+target.w*.5,pX=p.x+p.w/2;
+   const dead=E.step(copy,p,{right:pX<targetX-7,left:pX>targetX+7,jump:launched,jumpPressed:goJump},state,1/120);
+   if(p.ground===target.id)return true;if(dead)break;
   }
  }
  return false;
 }
-const failed=[];
 for(let i=0;i<15;i++){
- const w=E.makeLevel(i,LEVELS[i]);assert.equal(w.checkpoints.length,4);assert.equal(w.objects.filter(o=>o.type==='light'||o.type==='table').length,3);assert.equal(w.objects.filter(o=>o.type==='exit').length,1);
- const route=w.platforms.filter(p=>!p.secret);
- for(let j=1;j<route.length;j++){
-  let good=false;for(const t of [0,1.5,3,4.5,6])if(reachable(w,route[j-1],route[j],t)){good=true;break;}
-  leapCount++;if(!good)failed.push({level:i+1,a:route[j-1].id,b:route[j].id,gap:Math.round(route[j].x-route[j-1].x-route[j-1].w),dy:route[j].y-route[j-1].y});
- }
- for(const secret of w.platforms.filter(p=>p.secret)){
-  const below=w.platforms.find(p=>!p.secret&&p.x<=secret.x&&p.x+p.w>secret.x);
-  assert.ok(below&&below.y-secret.y<=90,'Secret is within jump height');
- }
+ const w=E.makeLevel(i,LEVELS[i]);assert.ok(w.checkpoints.length>=4);assert.equal(w.objects.filter(o=>o.type==='memory').length,1);assert.equal(w.objects.filter(o=>o.type==='exit').length,1);assert.ok(w.required.length>=1);
+ for(let j=1;j<w.route.length;j++){transfers++;if(!reachable(w,w.route[j-1],w.route[j]))failed.push({level:i+1,from:j-1,to:j,kind:w.route[j].type,gap:w.route[j].x-w.route[j-1].x-w.route[j-1].w,dy:w.route[j].y-w.route[j-1].y});}
+ const high=w.platforms.at(-1),below=w.route.find(p=>p.x<=high.x&&p.x+p.w>high.x);assert.ok(reachable(w,below,high),'optional memory '+i);
+ // Each checkpoint is stable, above the highest flood, and away from a hazard sweep.
+ for(const cp of w.checkpoints){assert.equal(w.platforms[cp.platform].type,'solid');assert.ok(cp.y+58<E.waterLine(w,makeState(w,Math.PI*3)));}
 }
-assert.equal(LEVELS[14].title,'Sevgilime Bir Kefen');
-assert.equal(LEVELS[7].actor,'damla');assert.equal(LEVELS[8].actor,'damla');
-const w=E.makeLevel(0,LEVELS[0]);
-function jumpHeight(held){const p=E.createPlayer(100,384);p.ground=0;let min=p.y;const state={time:0,phase:0,gates:{},assist:false};for(let n=0;n<150;n++){state.time+=1/120;E.step(w,p,{right:false,left:false,jump:n<held,jumpPressed:n===0},state,1/120);min=Math.min(min,p.y);}return 384-min;}
-assert.ok(jumpHeight(100)>jumpHeight(5)+35,'Holding produces a materially higher jump');
-console.log(JSON.stringify({levels:15,routeJumps:leapCount,unreachable:failed,shortJump:jumpHeight(5),longJump:jumpHeight(100)},null,2));
-assert.equal(failed.length,0,'Every mandatory transfer must be physically reachable at normal difficulty');
-
+function jumpHeight(held,spring=false){const w=E.makeLevel(0,LEVELS[0]);w.hazards=[];if(spring)w.platforms[0].type='spring';const p=E.createPlayer(100,384);p.ground=0;let min=p.y;const s=makeState(w);for(let n=0;n<150;n++){s.time+=1/120;E.step(w,p,{right:false,left:false,jump:n<held,jumpPressed:n===0},s,1/120);min=Math.min(min,p.y);}return 384-min;}
+assert.ok(jumpHeight(100)>jumpHeight(5)+35);assert.ok(jumpHeight(100,true)>180);
+const w=E.makeLevel(9,LEVELS[9]),s=makeState(w);s.tasks={};const c=w.crate,p=E.createPlayer(c.x-30,c.floor-58);p.ground=c.platform;for(let n=0;n<300;n++){s.time+=1/120;E.step(w,p,{right:true,left:false,jump:false},s,1/120);}assert.ok(s.tasks.crate,'pushing a real crate opens its wall');
+const steam={type:'steam',x:100,y:442,offset:0};assert.equal(E.hazard(steam,1).active,false);assert.equal(E.hazard(steam,1.8).warning,true);assert.equal(E.hazard(steam,2.5).active,true);assert.equal(E.hazard(steam,3.4).active,false);assert.ok(E.touches({x:100,y:400,w:26,h:40},E.hazard(steam,2.5)));assert.ok(!E.touches({x:100,y:260,w:26,h:58},E.hazard(steam,2.5)));
+console.log(JSON.stringify({levels:15,mandatoryTransfers:transfers,unreachable:failed,shortJump:jumpHeight(5),longJump:jumpHeight(100),springJump:jumpHeight(100,true)},null,2));assert.equal(failed.length,0);

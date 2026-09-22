@@ -2,3 +2,4 @@
 
 #portrait{float:left;width:112px;height:112px;margin:0 23px 10px 0;border-radius:5px;border:1px solid #edbd7d55}.dialogue-bottom{clear:both}.has-portrait #line{min-height:66px}#musicUnlock{position:fixed;right:26px;top:80px;background:#172b3a;z-index:19;font-size:11px}@media(max-height:530px){#portrait{width:80px;height:80px;margin:0 18px 5px 0}.has-portrait #line{min-height:48px;font-size:17px}#musicUnlock{top:70px}}@media(max-width:580px) and (orientation:portrait){#portrait{width:74px;height:74px;margin-right:14px}.has-portrait #line{font-size:17px}}
 
+#dialogue.poetry #line{font-style:italic;color:#f3dfb8}#dialogue.poetry #speaker{color:#bcb0d7}
