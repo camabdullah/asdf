@@ -26,11 +26,23 @@ Kayıtlar aynı tarayıcı ve cihazda `localStorage` ile tutulur. Kontrol noktal
 - Kırılgan ve hareketli platformlar; rüzgâr, su, zaman katmanı, döngü kapısı ve sipariş bulmacaları.
 - 30 tekrar izlenebilir açılış/kapanış sahnesi; okunarak ilerleyen diyaloglar, katmanlı çizimler, nefes/yürüme, yağmur ve ışık animasyonları.
 - Finalde bağlantıyı kapatma işlemi, sonucu önceden anlatılan ayrı bir etkileşimdir. Toplanan anılar finali değiştirmez.
-- Canvas çizimleri ve Web Audio ile üretilen özgün kısa tema. Dış kaynak, çerez, izleme, font veya oyun kütüphanesi yok.
+- Fotoğraflardan uyarlanan vektör karakterler ve diyalog portreleri. Kullanıcının sağladığı üç MP3 bölüm bazında yüklenir; diğer bölümlerde özgün kısa tema çalar. Çerez, izleme, dış font veya oyun kütüphanesi yok.
 
-Bu bir ilk oynanabilir sürümdür. **1,5–2 saatlik hedef süre ölçülüp doğrulanmış değildir.** 10–60 saniyelik tamamlanmış sinematik prodüksiyon yerine oyuncunun ilerlettiği animasyonlu diyalog sahneleri vardır. Portreler temsilîdir; kişilerin fotoğrafları henüz verilmemiştir. Çevreler stilize vektör çizimleridir; fotoğraflara dayalı anime karakter tasarımı ve elle boyanmış son sanat üretimi bu sürümde tamamlanmış değildir. Gerçek iPhone/Safari performansı ve uzun oyun oturumu ayrıca denenmelidir.
+Bu bir ilk oynanabilir sürümdür. **1,5–2 saatlik hedef süre ölçülüp doğrulanmış değildir.** 10–60 saniyelik tamamlanmış sinematik prodüksiyon yerine oyuncunun ilerlettiği animasyonlu diyalog sahneleri vardır. Karakterler gönderilen iki fotoğraf esas alınarak stilize vektör çizimleriyle yeniden tasarlanmıştır. Erkek karakterde taranmış kısa koyu saç, sakal ve çizgili gömlek; Damla’da uzun koyu saç, ince perçemler ve siyah kapüşonlu kullanılır. Fotoğrafların asılları depoya eklenmez. Çevreler de stilize vektör çizimleridir; elle boyanmış son sanat üretimi bu sürümde tamamlanmış değildir. Gerçek iPhone/Safari performansı ve uzun oyun oturumu ayrıca denenmelidir.
 
 Koru dışındaki şehir ayrıntıları, paylaşıldığı belirtilmeyen konuşmalar, ikinci restoran ziyareti ve final repliği özgün kurgudur. Damla’nın bugünkü düşünceleri hakkında iddia taşımaz. “Şamdanları Donanınca” bir hatıra olarak anılır; kaydı, melodisi ve sözleri kullanılmaz. İsmet Özel şiiri seçilmediği için alıntı eklenmemiştir.
+
+## Bölüm müzikleri
+
+| Kayıt | Bölümler |
+|---|---|
+| Yann Tiersen — Naval | 1, 3, 8, 10 |
+| Jóhann Jóhannsson — The Rocket Builder | 4, 6, 7, 9, 13 |
+| Max Richter — On the Nature of Daylight | 11, 14, 15 |
+
+2, 5 ve 12. bölümlerde özgün kısa tema devam eder. Kayıtlar kullanıcı tarafından sağlanan MP3 dosyalarıdır. Yalnızca gereken parça yüklenir; döngüde çalar, diyaloglarda kısılır, duraklatma ve arka plana geçişte durur. Son bank sahnesinde müzik susar. Safari sesi engellerse “Müziği başlat” düğmesine dokun.
+
+Açılış konuşması Tavuk Dünyası, Kremantar ve Barbeküs üzerinden yeniden yazıldı. Finalde aynı konuşmanın devamı duyulur.
 
 ## Hikâye haritası
 
@@ -62,14 +74,17 @@ Derleme veya paket kurulumu gerekmez. Depo kökünü herhangi bir statik HTTP su
 - `story.js`: 15 bölümün konuşmaları, görevleri ve dünya paletleri.
 - `engine.js`: sabit zaman adımlı fizik ve bölüm geometrisi.
 - `game.js`: kayıt, etkileşimler, ses, çizim ve menüler.
+- `characters.js`: fotoğraflardan uyarlanan hareketli karakterler ve büyük portreler.
+- `music.js`: bölüm müzikleri, ses seviyesi, duraklatma ve Safari oynatma yönetimi.
 - `tests/`: Node.js ile çalıştırılan fizik ve kampanya kontrolleri.
 
 ```sh
 node tests/engine.cjs
 node tests/campaign.cjs
+node tests/music.cjs
 ```
 
 Fizik testi her zorunlu geçiş için gerçek fizik motoruyla uygun kalkış/zamanlama arar; insan oynayışının veya toplam süre ölçümünün yerine geçmez. Kampanya testi denetimli bir DOM modeli içinde hikâye, masa, kayıt, duraklatma ve final akışlarını sınar. Tarayıcıda masaüstü ve 844×390 yatay ekran düzeni görsel olarak kontrol edilmiştir.
 
-Sonraki kişiselleştirme: karakter adı, fotoğraflar/kıyafetler, parkın görüntüsü, Bartın/Eskişehir’in anlamı, gerçek şakalar, şiir ve kullanılacak ses kayıtları.
+Sonraki kişiselleştirme: karakter adı, parkın görüntüsü, Bartın/Eskişehir’in anlamı, gerçek şakalar, şiir ve Damla’nın paylaşılacak ses kaydı.
 

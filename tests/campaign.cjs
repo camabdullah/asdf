@@ -1,11 +1,11 @@
 const path=require('node:path');
 process.chdir(path.resolve(__dirname,'..'));
 const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
-class Element{constructor(){this.children=[];this.hidden=false;this.classList={add(){},remove(){}};this.style={};this.value='';this.checked=false;this.events={};}append(e){this.children.push(e);}addEventListener(n,f){this.events[n]=f;}setPointerCapture(){}getContext(){return{};}set innerHTML(v){this.html=v;this.children=[];}get innerHTML(){return this.html||'';}}
+class Element{constructor(){this.children=[];this.hidden=false;this.classList={add(){},remove(){},toggle(){}};this.style={};this.value='';this.checked=false;this.events={};}append(e){this.children.push(e);}addEventListener(n,f){this.events[n]=f;}setPointerCapture(){}getContext(){return{};}setAttribute(){}removeAttribute(){}pause(){this.paused=true;}load(){}play(){this.paused=false;return Promise.resolve();}set innerHTML(v){this.html=v;this.children=[];}get innerHTML(){return this.html||'';}}
 const nodes={},events={},stored={};const document={getElementById:id=>nodes[id]||(nodes[id]=new Element()),createElement:()=>new Element(),querySelectorAll:()=>[],addEventListener:(n,f)=>events[n]=f,hidden:false};
 const window={addEventListener:(n,f)=>events[n]=f,devicePixelRatio:1};
 const context={document,window,localStorage:{getItem:k=>stored[k]||null,setItem:(k,v)=>stored[k]=v},HTMLInputElement:class{},innerWidth:844,innerHeight:390,requestAnimationFrame(){},setTimeout(){return 0;},clearTimeout(){},console};
-vm.createContext(context);vm.runInContext(fs.readFileSync('story.js','utf8'),context);vm.runInContext(fs.readFileSync('engine.js','utf8'),context);
+vm.createContext(context);vm.runInContext(fs.readFileSync('story.js','utf8'),context);vm.runInContext(fs.readFileSync('engine.js','utf8'),context);vm.runInContext(fs.readFileSync('music.js','utf8'),context);vm.runInContext(fs.readFileSync('characters.js','utf8'),context);
 const code=fs.readFileSync('game.js','utf8').replace(/\}\)\(\);\s*$/,`window.test={startLevel,finishScene,interact,update,pause,closeModal,persist,respawn,home,render,showScene,complete,sceneMenu,get:()=>({mode,world,player,state,save,checkpoint,actor,scene,index}),at:(o)=>{near=o;player.x=o.x-13;player.y=o.y-58;},phase:(n)=>state.phase=n};})();`);
 vm.runInContext(code,context);const t=window.test;
 for(let i=0;i<15;i++){

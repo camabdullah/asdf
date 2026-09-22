@@ -9,7 +9,7 @@ const WORLDS = [
 const LEVELS = [
  {title:'Yanımda Bir Yer',w:0,actor:'sen',mechanic:'learn',seed:2,
  goal:'Sıcak ışığı takip et. Yön tuşlarıyla yürü, ↑ ile zıpla.',
- intro:[['ANLATICI','Ankara, Koru. Dünya henüz iki kişilik.'],['DAMLA','Dostuuum…'],['SEN','Bu girişin arkasından kesin benden bir şey isteyeceksin.'],['DAMLA','Bir cümleye ücretsiz başlayamıyor muyum artık?'],['SEN','Devamı ücretli gibi bir tonun var.'],['ANLATICI','İkiniz de gülüyorsunuz. Sonra ayaklarınızın altındaki yol bir kâğıt gibi yırtılıyor.'],['SEN','Damla? Az önce buradaydın.']],
+ intro:[['ANLATICI','Ankara, Koru. Dünya henüz iki kişilik.'],['DAMLA','Dostuuum… Tavuk Dünyası’na mı gitsek?'],['SEN','Senin Kremantar’ın şu an bizi beklediğini hissediyorum.'],['DAMLA','Sen de Barbeküs diyeceksin. Ama gidince yine menüye bakarsın, Aptullah.'],['SEN','Tabii bakarım. Belki bu sefer…'],['ANLATICI','Damla gülerek sana dönüyor. Vereceği cevabı duyamadan ayaklarınızın altındaki yol bir kâğıt gibi yırtılıyor.'],['SEN','Damla? Az önce buradaydın.']],
  signs:[['SEN','Bankın ışığı hâlâ sıcak. Belki bu taraftan gitmiştir.'],['SEN','Bu parkta normalde bu kadar boşluk yoktu. Belediyeye yazılacak şeyler listesi büyüyor.'],['SEN','Bir ışık daha. Tamam, dostuuum. Geliyorum.']],
  outro:[['ANLATICI','Bir anlığına karşı yolda bir gölge beliriyor. Yaklaşınca yalnızca rüzgâr kalıyor.'],['SEN','Bekle. Bir yolunu bulacağım.']],
  memory:['Bankın sağ tarafı','İkiniz de öbürünün yerini ezbere biliyorsunuz. Bazen yakınlık, sormadan biraz yana kaymak.']},
@@ -95,7 +95,7 @@ const LEVELS = [
  goal:'Üç halkayı tamamla. Son geçide dokunmadan önce neyin biteceğini hatırla.',
  intro:[['ANLATICI','Bu bir insana değil, birlikte hayal edilen geleceğe veda. Damla yaşıyor. Sen de buradan çıkacaksın.'],['SEN','Bir kapıyı açık tutarak bir insanı yakınımda tutamam.']],
  signs:[['SEN','Bir: Yaşadığımız şeyler olduğu gibi kalacak.'],['SEN','İki: Sen kendi yoluna devam edebileceksin.'],['SEN','Üç: Ben de çıkacağım. Yollarımız birleşmese de.']],
- outro:[['ANLATICI','Geçit kapanıyor. Damla’nın önündeki döngü çözülüyor. Işık, bir insanın kendi yoluna çıkmasına yetecek kadar açık.'],['ANLATICI','Koru. İlk akşam. Bu kez konuşma yarıda kalmıyor.'],['DAMLA','Dostuuum… Bu bankın bir tarafı daha rahat.'],['SEN','Az önce senin oturduğun taraf mı?'],['DAMLA','Yok. Sen yana kayınca oluşan taraf.'],['SEN','Belediyenin hizmetini sahipleniyorsun şu an.'],['ANLATICI','Gülüyorsunuz. Dünya o an için iki kişilik.'],['ANLATICI','Daha sonraki bir akşam. Aynı bank. Bu kez yanında boş bir yer var. Parkın sesi devam ediyor.']],
+ outro:[['ANLATICI','Geçit kapanıyor. Damla’nın önündeki döngü çözülüyor. Işık, bir insanın kendi yoluna çıkmasına yetecek kadar açık.'],['ANLATICI','Koru. İlk akşam. Bu kez konuşma yarıda kalmıyor.'],['DAMLA','Dostuuum… Tavuk Dünyası’na mı gitsek?'],['SEN','Senin Kremantar’ın şu an bizi beklediğini hissediyorum.'],['DAMLA','Sen de Barbeküs diyeceksin. Ama gidince yine menüye bakarsın, Aptullah.'],['SEN','Tabii bakarım. Belki bu sefer…'],['DAMLA','Bu sefer de Barbeküs. Hadi kalk, dostuuum.'],['SEN','Tamam. Ama menüye bir göz atarım.'],['ANLATICI','Gülüyorsunuz. Dünya o an için iki kişilik.'],['ANLATICI','Daha sonraki bir akşam. Aynı bank. Bu kez yanında boş bir yer var. Parkın sesi devam ediyor.']],
  memory:['Kalan yer','Birlikte gülmüş olmanız, yollar ayrıldığında hiç olmamış sayılmıyor.']}
 ];
 if(typeof module!=='undefined')module.exports={LEVELS,WORLDS};
