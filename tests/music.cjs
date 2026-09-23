@@ -10,7 +10,7 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
 (async()=>{
  const e=new Media(),blocked=[],levels=[];const context={currentTime:5,createMediaElementSource:()=>({connect(){}}),createGain:()=>({connect(){},gain:{cancelScheduledValues(){},setTargetAtTime:v=>levels.push(v)}})};
  const music=create({element:e,context,onBlocked:v=>blocked.push(v)});
- assert.equal(chapters.length,17);assert.deepEqual([...new Set(chapters.filter(Boolean))].sort(),Object.keys(tracks).sort());
+ assert.equal(chapters.length,19);assert.deepEqual([...new Set(chapters.filter(Boolean))].sort(),Object.keys(tracks).sort());
  const play={track:'naval',playing:true,volume:.5};music.sync(play);await tick();assert.equal(e.src,tracks.naval.file);assert.equal(e.paused,false);assert.equal(e.loop,true);
  for(let n=0;n<60;n++)music.sync(play);assert.equal(e.plays,1);assert.equal(e.loads,1);
  e.currentTime=28;music.sync({...play,playing:false});assert.equal(e.paused,true);music.sync(play);await tick();assert.equal(e.currentTime,28,'Pause/resume must not rewind');
@@ -26,4 +26,4 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
  console.log('PASS: three recordings, lazy loading, loop, chapter switch, volume/ducking, pause/resume without rewind, mute, autoplay rejection/retry, media error, late-promise race');
 })();
 
-assert.equal(chapters.length,17);assert.ok(chapters.every(k=>tracks[k]));
+assert.equal(chapters.length,19);assert.ok(chapters.every(k=>tracks[k]));

@@ -2,8 +2,9 @@
 const RoadCinema=(()=>{
  const clamp=x=>Math.max(0,Math.min(1,x)),ease=x=>{x=clamp(x);return x*x*(3-2*x);};
  const rupture=()=>({kind:'rupture',duration:14,title:'Biraz önce yan yanaydınız.',caption:'Sonra aynı yol, iki ayrı akşama açıldı.'});
- function transition(i,d){return RoadReels.transition(i);}
+ function transition(i,d){if(d.mechanic==='dreamGarden')return RoadDreams.preparation();if(d.mechanic==='dreamReunion')return RoadDreams.collapse();return RoadReels.transition(i>=11?i-2:i);}
  function draw(c,W,H,f,person){
+  if(f.kind.startsWith('dream-')){RoadDreams.draw(c,W,H,f,person);return;}
   if(f.kind==='reel'){RoadReels.draw(c,W,H,f,person);return;}
   const t=f.time,kind=f.kind,progress=clamp(t/f.duration),mid=W/2;
   const rect=(x,y,w,h,color)=>{c.fillStyle=color;c.fillRect(x,y,w,h);};

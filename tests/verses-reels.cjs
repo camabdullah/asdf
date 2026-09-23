@@ -7,9 +7,9 @@ for(let n=0;n<4;n++){
  assert.ok(q.others.every(o=>o.work!==q.work&&o.source.startsWith('https://')));
  for(const wrong of q.others)assert.ok(!V.check(n,wrong.text));
 }
-const w=E.makeLevel(13,LEVELS[13]),s={tasks:{},phase:0};assert.equal(w.required.length,4);
+const w=E.makeLevel(15,LEVELS[15]),s={tasks:{},phase:0};assert.equal(w.required.length,5);
 for(let n=0;n<4;n++){const gate=w.route.find(p=>p.gate==='verse'+n);assert.ok(!E.solid(gate,s));s.tasks['verse'+n]=true;assert.ok(E.solid(gate,s));}
-assert.equal(R.list.length,LEVELS.length-1);assert.equal(new Set(R.list.map(v=>v[0])).size,R.list.length);
+assert.equal(R.list.length,LEVELS.length-3);assert.equal(new Set(R.list.map(v=>v[0])).size,R.list.length);
 const frames=[];
 for(let i=0;i<R.list.length;i++){
  const spec=R.transition(i),traces=[];assert.equal(spec.memory,true);assert.equal(spec.kind,'reel');
@@ -22,5 +22,5 @@ for(let i=0;i<R.list.length;i++){
 }
 assert.equal(new Set(frames).size,R.list.length,'chapter transitions must differ in drawing, not only their captions');
 for(const d of LEVELS)for(const name of ['intro','outro','signs','walk'])assert.ok(!(d[name]||[]).some(l=>l[0]==='SEN'));
-assert.ok(LEVELS[12].outro.some(l=>l[1].includes('insan-ı kâmil')));assert.ok(LEVELS[12].outro.some(l=>l[1].includes('nâtık')));
+assert.ok(LEVELS[14].outro.some(l=>l[1].includes('insan-ı kâmil')));assert.ok(LEVELS[14].outro.some(l=>/nâtık/i.test(l[1])));
 console.log('PASS: four sourced questions, three choices each, isolated answer gates, Abdullah speaker names, sixteen distinct monochrome animation drawings');

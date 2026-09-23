@@ -4,7 +4,7 @@ const RoadEngine=(()=>{
  const layouts=typeof ROAD_LAYOUTS!=='undefined'?ROAD_LAYOUTS:require('./levels.js');
  function makeLevel(index,def){
   const layout=layouts[index],platforms=[],objects=[],checkpoints=[],hazards=[],required=[];let end=0,phaseGroup=0,wasPhase=false;
-  const types={s:'solid',f:'crumble',w:'swing',b:'spring',c:'conveyor',p:'phase',g:'gate',m:'moving',l:'lift',r:'raft'};
+  const types={s:'solid',f:'crumble',w:'swing',b:'spring',c:'conveyor',p:'phase',g:'gate',m:'moving',l:'lift',r:'raft',t:'pulse'};
   for(const token of layout.route.split(' ')){
    const [kind,gap,y,w]=token.split(','),id=platforms.length,x=end+Number(gap),type=types[kind];
    if(type==='phase'&&!wasPhase)phaseGroup++;wasPhase=type==='phase';
@@ -12,10 +12,10 @@ const RoadEngine=(()=>{
   }
   const route=platforms.slice();
   for(const n of layout.check){const a=route[n];checkpoints.push({x:a.x+38,y:a.y-PHYS.height,platform:a.id});}
-  for(const [n,type,key,label,sign]of layout.devices){const a=route[n];objects.push({id:key,type,key,label:type==='dial'?'Halkayı ritimde sabitle':label,lines:key==='long-memory'?def.walk:null,n:sign,x:a.x+a.w*.64,y:a.y,platform:a.id});required.push(key);}
+  for(const [n,type,key,label,sign]of layout.devices){const a=route[n];objects.push({id:key,type,key,logic:layout.logic?.[key],label:type==='dial'?'Halkayı ritimde sabitle':label,lines:layout.lines?.[key]||(key==='long-memory'?def.walk:null),n:sign,x:a.x+a.w*.64,y:a.y,platform:a.id});required.push(key);}
   const clockAt=new Set();
   for(let n=0;n<route.length;n++)if(route[n].type==='phase'&&route[n-1]?.type!=='phase')clockAt.add(n-1);
-  if(index===4||index===10)for(const n of layout.check)clockAt.add(n);
+  if(def.mechanic==='phase'||def.mechanic==='compare')for(const n of layout.check)clockAt.add(n);
   for(const n of clockAt){const a=route[n];objects.push({id:'clock'+n,type:'clock',x:a.x+a.w-32,y:a.y,n,platform:a.id});}
   const a=route[layout.memory],high={id:platforms.length,x:a.x+a.w*.45,y:a.y-78,w:78,h:20,type:'solid',baseX:a.x+a.w*.45,baseY:a.y-78,secret:true,timer:0,fall:0};platforms.push(high);
   objects.push({id:'memory',type:'memory',x:high.x+39,y:high.y,n:0,platform:high.id});
@@ -24,13 +24,17 @@ const RoadEngine=(()=>{
   if(layout.crate!==undefined){const a=route[layout.crate];crate={x:a.x+95,startX:a.x+95,y:a.y-40,w:40,h:40,min:a.x+30,max:a.x+a.w-95,plate:a.x+a.w*.63,wall:a.x+a.w-30,floor:a.y,platform:a.id};required.push('crate');}
   if(index===6)for(const n of layout.check.slice(0,3)){const a=route[n];objects.push({id:'prepared'+n,type:'beacon',x:a.x+a.w-42,y:a.y,platform:a.id});}
   const last=route.at(-1);objects.push({id:'exit',type:'exit',x:last.x+last.w-95,y:last.y,platform:last.id});
-  return {platforms,route,objects,checkpoints,hazards,crate,required,width:end+80,index,def,goal:layout.goal};
+  return {platforms,route,objects,checkpoints,hazards,crate,required,width:end+80,index,def,goal:layout.goal,details:layout.details||[]};
  }
  function createPlayer(x=85,y=384){return {x,y,vx:0,vy:0,w:26,h:58,ground:null,coyote:0,buffer:0,facing:1,steps:0};}
- function solid(p,state){return p.fall<1&&(p.type!=='phase'||p.phase===state.phase)&&(p.type!=='gate'||state.tasks?.[p.gate]);}
+ function pulse(p,state){const t=((state.time||0)+p.id*.19)%4.6;return {active:t<3.3,warning:t>=2.5&&t<3.3,remaining:t<3.3?3.3-t:4.6-t};}
+ function solid(p,state){return p.fall<1&&(p.type!=='phase'||p.phase===state.phase)&&(p.type!=='gate'||state.tasks?.[p.gate])&&(p.type!=='pulse'||pulse(p,state).active);}
  function waterLine(world,state){return ['water','lantern'].includes(world.def.mechanic)?480+Math.sin(state.time*.5)*28+(state.tasks?.sluice?48:0):740;}
  function wind(world,state){return ['wind','mixed','final'].includes(world.def.mechanic)?(Math.sin(state.time*.8)*52+Math.sin(state.time*2.1)*9)*(state.assist?.62:1):0;}
  function hazard(h,time){
+  if(h.type==='bramble')return {x:h.x-23,y:h.y-25,w:46,h:25,active:true};
+  if(h.type==='shutter'){const t=(time+h.offset)%5;return {x:h.x-10,y:h.y-148,w:20,h:148,active:t<2.5,warning:t>=4.2,blocking:true};}
+  if(h.type==='drip'){const t=(time+h.offset)%4.8;return {x:h.x,y:h.y-174+Math.max(0,t-1.8)*195,r:11,active:t>=1.8&&t<2.75,warning:t>=1&&t<1.8};}
   if(h.type==='steam'){const t=(time+h.offset)%4;return {x:h.x-16,y:h.y-74,w:32,h:74,active:t>=2.05&&t<3.45,warning:t>=1.35&&t<2.05};}
   const angle=Math.sin(time*1.7+h.offset)*.65;return {x:h.x+Math.sin(angle)*112,y:h.y-128+Math.cos(angle)*112,r:15,active:true};
  }
@@ -65,10 +69,10 @@ const RoadEngine=(()=>{
    if(!state.tasks.crate&&p.x+p.w>c.wall&&p.x<c.wall+14&&p.y+p.h>c.floor-125&&p.y<c.floor){p.x=oldX<c.wall?c.wall-p.w:c.wall+14;}
   }
   p.steps+=Math.abs(p.vx)*dt;
-  for(const h of world.hazards){const hit=hazard(h,state.time);if(hit.active&&touches(p,hit))return true;}
+  for(const h of world.hazards){const hit=hazard(h,state.time);if(hit.active&&touches(p,hit)){if(hit.blocking){p.x=oldX+p.w/2<h.x?hit.x-p.w:hit.x+hit.w;p.vx=0;}else return true;}}
   return p.y+p.h>waterLine(world,state)||p.y>720;
  }
  function resetPlatforms(world,state){for(const p of world.platforms){p.timer=0;p.fall=0;}if(world.crate&&!state?.tasks?.crate)world.crate.x=world.crate.startX;}
- return {PHYS,makeLevel,createPlayer,solid,step,resetPlatforms,hazard,waterLine,touches,wind};
+ return {PHYS,makeLevel,createPlayer,solid,step,resetPlatforms,hazard,waterLine,touches,wind,pulse};
 })();
 if(typeof module!=='undefined')module.exports=RoadEngine;
