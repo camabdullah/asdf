@@ -4,26 +4,26 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#131d2b"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="description" content="İki insan. Aynı anılar. Birbirine ters akan iki yol. Dokunmatik bir hikâye ve platform oyunu.">
-<title>Sana Gelen Yol</title><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css?v=5">
+<title>Sana Gelen Yol</title><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 <canvas id="game" aria-label="Sana Gelen Yol oyun sahnesi"></canvas>
 <audio id="soundtrack" preload="none" loop playsinline></audio>
 <button id="musicUnlock" class="secondary" hidden>Müziği başlat ♫</button>
 <main id="home" class="overlay home">
- <div class="brand"><span class="mark">✧</span> DAMLA & SEN <span class="edition">BİR HİKÂYE OYUNU</span></div>
+ <div class="brand"><span class="mark">✧</span> DAMLA & ABDULLAH <span class="edition">BİR HİKÂYE OYUNU</span></div>
  <div class="home-copy"><p class="eyebrow">BAZI YOLLAR BİR İNSANA ÇIKAR.</p><h1>Sana<br>Gelen <em>Yol</em><span>.</span></h1><p class="intro">Aynı anılar. Birbirine ters akan iki yol.<br>Bir yerlerde, o da seni arıyor.</p>
  <div class="home-actions"><button id="start" class="primary">Yola çık <span>↗</span></button><button id="continue" class="primary" hidden>Yoluna devam et <span>↗</span></button><button id="chapters" class="text-btn">Bölümler <span>→</span></button></div>
- <div class="home-meta"><span>6 DÜNYA</span><i></i><span>16 BÖLÜM</span><i></i><span>TEK BİR İZ</span></div></div>
+ <div class="home-meta"><span>6 DÜNYA</span><i></i><span>17 BÖLÜM</span><i></i><span>TEK BİR İZ</span></div></div>
  <div class="scene-caption"><span>01 / ANKARA, KORU</span><p>Yanında boş bir yer var.</p></div>
  <footer><button id="about" class="text-btn small">Oyun hakkında</button><button id="openingReplay" class="text-btn small">Koru’daki açılışı izle</button><button id="homeSound" class="text-btn small">♫ Ses açık</button></footer>
 </main>
-<div id="hud" hidden><div class="chapter-label"><span id="worldLabel"></span><strong id="levelLabel"></strong></div><div class="hud-right"><span id="actorLabel">SEN</span><span id="routeCount">0/3 İZ</span><span id="memoryCount">✧ 0</span><button id="pause" aria-label="Oyunu duraklat">Ⅱ</button></div><div class="progress"><div id="progressFill"></div></div></div>
+<div id="hud" hidden><div class="chapter-label"><span id="worldLabel"></span><strong id="levelLabel"></strong></div><div class="hud-right"><span id="actorLabel">ABDULLAH</span><span id="routeCount">0/3 İZ</span><span id="memoryCount">✧ 0</span><button id="pause" aria-label="Oyunu duraklat">Ⅱ</button></div><div class="progress"><div id="progressFill"></div></div></div>
 <div id="objective" hidden></div><div id="windIndicator" hidden></div><div id="toast" role="status" aria-live="polite"></div>
 <div id="controls" hidden><div class="directions"><button id="left" aria-label="Sola git">‹</button><button id="right" aria-label="Sağa git">›</button></div><div class="actions"><button id="interact" class="interact" hidden><span id="interactLabel">Dokun</span><b>✧</b></button><button id="jump" aria-label="Zıpla"><span>↑</span><small>ZIPLA</small></button></div></div>
 <div id="dialogue" hidden><div class="dialogue-card"><canvas id="portrait" width="224" height="224" aria-label="Konuşan karakterin portresi" hidden></canvas><span id="speaker"></span><p id="line"></p><div class="dialogue-bottom"><span id="lineCount"></span><button id="skipScene" class="text-btn">Sahneyi geç</button><button id="nextLine" class="text-btn">Devam <b>→</b></button></div></div></div>
 <div id="modal" class="overlay modal" hidden><section class="panel"><div class="panel-top"><span id="modalKicker" class="eyebrow">SANA GELEN YOL</span><button id="closeModal" aria-label="Kapat">×</button></div><h2 id="modalTitle"></h2><div id="modalBody"></div></section></div>
 <div id="rotate" hidden><span>↻</span><h2>Yola biraz daha yer aç.</h2><p>Telefonunu yatay çevirerek oyna.</p><button id="portraitContinue" class="text-btn">Bu şekilde devam et →</button></div>
 <div id="cinema" hidden><button id="filmPause" aria-label="Animasyonu duraklat">Ⅱ</button><div class="film-copy"><span class="film-eyebrow">SANA GELEN YOL · BİR HATIRA</span><h2 id="filmTitle"></h2><p id="filmCaption"></p></div><button id="filmSkip">Animasyonu geç →</button><div class="film-track"><div id="filmProgress"></div></div></div><button id="endingMenu" class="secondary" hidden>Anılar ve menü →</button>
-<script src="progress.js?v=5"></script><script src="puzzles.js?v=5"></script><script src="cinema.js?v=5"></script><script src="story.js?v=5"></script><script src="levels.js?v=5"></script><script src="engine.js?v=5"></script><script src="characters.js?v=5"></script><script src="music.js?v=5"></script><script src="game.js?v=5"></script>
+<script src="progress.js?v=6"></script><script src="puzzles.js?v=6"></script><script src="verses.js?v=6"></script><script src="reels.js?v=6"></script><script src="cinema.js?v=6"></script><script src="story.js?v=6"></script><script src="levels.js?v=6"></script><script src="engine.js?v=6"></script><script src="characters.js?v=6"></script><script src="music.js?v=6"></script><script src="game.js?v=6"></script>
 </body></html>

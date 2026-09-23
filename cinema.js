@@ -2,8 +2,9 @@
 const RoadCinema=(()=>{
  const clamp=x=>Math.max(0,Math.min(1,x)),ease=x=>{x=clamp(x);return x*x*(3-2*x);};
  const rupture=()=>({kind:'rupture',duration:14,title:'Biraz önce yan yanaydınız.',caption:'Sonra aynı yol, iki ayrı akşama açıldı.'});
- function transition(i,d){const kind=[2,8,11].includes(i)?'vtr':d.mechanic==='coffee'?'coffee':['tram','phase','gate'].includes(d.mechanic)?'tram':['water','lantern'].includes(d.mechanic)?'rain':d.w===3?'ayran':d.mechanic==='relay'?'gate':'path';return {kind,duration:kind==='vtr'?15:11,title:kind==='vtr'?'Bir hatıranın içinden':d.title,caption:({vtr:'Bazı görüntüler eskir. İçindeki yakınlık yerinde kalır.',coffee:'İki latte. Biraz daha oturmak için iki sebep.',tram:'Aynı durak. Başka bir akşam.',rain:'Birinin bıraktığı ışık, öbürünün yoluna düşer.',ayran:'Tek ayran. İki kişinin alışkanlığı.',gate:'Bir kapı kapanırken bir yol açılıyor.',path:'Bir sonraki yola, yanında kalanlarla.'})[kind]};}
+ function transition(i,d){return RoadReels.transition(i);}
  function draw(c,W,H,f,person){
+  if(f.kind==='reel'){RoadReels.draw(c,W,H,f,person);return;}
   const t=f.time,kind=f.kind,progress=clamp(t/f.duration),mid=W/2;
   const rect=(x,y,w,h,color)=>{c.fillStyle=color;c.fillRect(x,y,w,h);};
   const line=(x,y,a,b,color,width=2)=>{c.strokeStyle=color;c.lineWidth=width;c.beginPath();c.moveTo(x,y);c.lineTo(a,b);c.stroke();};
@@ -43,6 +44,7 @@ const RoadCinema=(()=>{
   }else if(kind==='gate'){
    sky(true);rect(0,444,W,156,'#303e48');const gap=ease(t/f.duration);c.strokeStyle='#e4c28c';c.lineWidth=4;for(let n=0;n<3;n++){c.beginPath();c.ellipse(mid,310,70+n*24,102+n*12,Math.sin(t*.2)*.08,0,Math.PI*2);c.stroke();}rect(mid-12*(1-gap),199,24*(1-gap),238,'#e2c18f66');people(mid-155-gap*120,438,'sen',-1);people(mid+155+gap*120,438,'damla',1);for(let n=0;n<25;n++)ellipse(mid+Math.sin(n*2.4+t)*90*(1-gap),310+Math.cos(n*2.4+t)*100,2,2,'#f3d7a7');
   }else{park();rect(0,0,W,H,'#23354e44');for(let n=0;n<22;n++){const x=(n*97+t*28)%W,y=180+(n*31)%240;ellipse(x,y+Math.sin(t+n)*8,3,1.2,'#e4c69177');}}
+  if(kind==='coffee'||kind==='ayran'){c.globalCompositeOperation='saturation';rect(0,0,W,H,'#888');c.globalCompositeOperation='source-over';}
   // Film borders and gentle fades; no rapid white flashes.
   rect(0,0,W,62,'#0a111b');rect(0,494,W,106,'#0a111b');const fade=Math.max(1-ease(t/.7),ease((t-f.duration+.7)/.7));if(fade>0)rect(0,0,W,H,'rgba(8,16,27,'+fade+')');c.restore();
  }
