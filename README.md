@@ -1,10 +1,16 @@
-# Sana Gelen Yol — v7
+# Sana Gelen Yol — v8
 
-[Oyunu aç](https://camabdullah.github.io/asdf/?v=7)
+[Oyunu aç](https://camabdullah.github.io/asdf/?v=8)
 
 Dokunmatik, yandan ilerleyen 2D hikâye ve çevre bulmacası oyunu. 6 dünya, 19 bölüm. Yatay iPhone ekranı hedeflenir; masaüstünde de çalışır. Bölüm süreleri oyuncu testleriyle ölçülmedi; 1,5–2 saatlik süre bir tasarım hedefidir.
 
-## Bu sürüm
+## v8 güncellemesi
+
+- Damla’nın fotoğrafa dayalı, Abdullah ile aynı resimli üslupta yeni portresi. Hareketli karakter ve ara sahnelerde ince perçemler, doğal küçük gözler, yuvarlak yüz hatları, uzun saç ve siyah kapüşonlu üst yenilendi. İki karakterin portresi de geç yüklenirse konuşan kişiyi değiştirmeden güncellenir.
+- Kullanıcının sağladığı iki yeni kayıt: Yann Tiersen / Fulya Akpolat — Sur le fil (4, 5 ve 16. bölümler); Philip Glass — Koyaanisqatsi (6, 17 ve 18. bölümler). Toplam beş kayıt; her bölümde müzik var. Finalin tek başına bank sahnesinde Daylight sürer.
+- Bölüm düzeni değişmedi; v7 kayıt düzeni aynen kullanılır.
+
+## v7 ile eklenenler
 
 - Abdullah’ın bütün ana konuşmaları daha edebî, düşünsel ve kişisel bir dille yeniden yazıldı. Damla’nın sıcak gündelik dili ve karşılıklı mizah korundu.
 - 9. bölümden sonra iki yeni bölüm: **Sana Bir Akşam Hazırladım** ve **Bir Ömürlük Bir An**. Önce ışıklar, denge köprüsü ve buluşma hazırlığı; sonra kavuşma, birlikte ilerleyiş ve hayalin çözülmesi.
@@ -29,9 +35,9 @@ Sık kontrol noktaları ve sınırsız deneme vardır. Düşmek hikâyeyi deği�
 | 1 | Yanımda Bir Yer | Ankara / Koru | Yann Tiersen · Naval |
 | 2 | Yolun Bittiği Yer | Ankara / Koru | Jóhann Jóhannsson · The Rocket Builder |
 | 3 | Aynı Bank, Başka Akşam | Ankara / Koru | Yann Tiersen · Naval |
-| 4 | Bir Durak Geriden | Eskişehir | Jóhann Jóhannsson · The Rocket Builder |
-| 5 | Porsuk’un Öteki Saati | Eskişehir | Max Richter · On the Nature of Daylight |
-| 6 | Kapıyı Kapatan Adam | Eskişehir | Jóhann Jóhannsson · The Rocket Builder |
+| 4 | Bir Durak Geriden | Eskişehir | Yann Tiersen · Sur le fil — Fulya Akpolat (piyano) |
+| 5 | Porsuk’un Öteki Saati | Eskişehir | Yann Tiersen · Sur le fil — Fulya Akpolat (piyano) |
+| 6 | Kapıyı Kapatan Adam | Eskişehir | Philip Glass · Koyaanisqatsi |
 | 7 | Suyun Hatırladığı | Bartın | Jóhann Jóhannsson · The Rocket Builder |
 | 8 | Sen Buradan Geç Diye | Bartın | Yann Tiersen · Naval |
 | 9 | İlk Bulduğun, Son Bıraktığım | Bartın | Jóhann Jóhannsson · The Rocket Builder |
@@ -41,9 +47,9 @@ Sık kontrol noktaları ve sınırsız deneme vardır. Düşmek hikâyeyi deği�
 | 13 | İki Kişilik Masa | Ankara / Tavuk Dünyası | Max Richter · On the Nature of Daylight |
 | 14 | Hesap Masada Kaldı | Ankara / Tavuk Dünyası | Max Richter · On the Nature of Daylight |
 | 15 | İki Latte, Biraz Daha Zaman | Ankara / Caffelab | Yann Tiersen · Naval |
-| 16 | Bir Dizenin Öte Yanı | Ankara / Caffelab | Yann Tiersen · Naval |
-| 17 | Bütün Yollar Buraya | Koru’nun Öte Yanı | Jóhann Jóhannsson · The Rocket Builder |
-| 18 | Son Geçit | Koru’nun Öte Yanı | Max Richter · On the Nature of Daylight |
+| 16 | Bir Dizenin Öte Yanı | Ankara / Caffelab | Yann Tiersen · Sur le fil — Fulya Akpolat (piyano) |
+| 17 | Bütün Yollar Buraya | Koru’nun Öte Yanı | Philip Glass · Koyaanisqatsi |
+| 18 | Son Geçit | Koru’nun Öte Yanı | Philip Glass · Koyaanisqatsi |
 | 19 | Sevgilime Bir Kefen | Koru’nun Öte Yanı | Max Richter · On the Nature of Daylight |
 
 Kayıtlar kullanıcı tarafından sağlandı; bölüm bazında yüklenir ve döngüye girer. Müzik, tarayıcının ilk kullanıcı hareketinden sonra başlayabilir. “Şamdanları Donanınca” hatıra olarak anılır; bu şarkının kaydı veya melodisi eklenmedi. Şiir ve şarkı sorularının kaynakları [POETRY.md](POETRY.md) dosyasında.
@@ -54,7 +60,7 @@ Kayıtlar kullanıcı tarafından sağlandı; bölüm bazında yüklenir ve dön
 
 ## Teknik yapı
 
-Bağımlılıksız HTML/CSS/Canvas 2D. Fizik sabit 120 Hz adımla ilerler; ekran başına DPR en fazla 2’dir. Yeni görseller toplam yaklaşık 351 KB WebP; bahçe yalnız ona yaklaşan bölümlerde yüklenir. Fotoğrafların asılları yayınlanmaz. Portre görseli yüklenmezse vektör portre devam eder; bahçe yüklenmezse çizilmiş gökyüzü kullanılır.
+Bağımlılıksız HTML/CSS/Canvas 2D. Fizik sabit 120 Hz adımla ilerler; ekran başına DPR en fazla 2’dir. Üç resimli görsel toplam yaklaşık 396 KB WebP; bahçe yalnız ona yaklaşan bölümlerde yüklenir. Fotoğrafların asılları yayınlanmaz. Portre görseli yüklenmezse vektör portre devam eder; bahçe yüklenmezse çizilmiş gökyüzü kullanılır.
 
 - story.js: 19 bölüm, özgün diyaloglar ve anlatı sırası.
 - levels.js, engine.js: güzergâhlar, fizik, engel uyarıları, kontrol noktaları.
