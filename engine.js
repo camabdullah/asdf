@@ -8,11 +8,11 @@ const RoadEngine=(()=>{
   for(const token of layout.route.split(' ')){
    const [kind,gap,y,w]=token.split(','),id=platforms.length,x=end+Number(gap),type=types[kind];
    if(type==='phase'&&!wasPhase)phaseGroup++;wasPhase=type==='phase';
-   platforms.push({id,x,y:+y,w:+w,h:24,type,baseX:x,baseY:+y,timer:0,fall:0,phase:phaseGroup%2,gate:layout.gates?.[id],control:layout.controls?.[id],belt:index%2?-65:65});end=x+Number(w);
+   platforms.push({id,x,y:+y,w:+w,h:24,type,baseX:x,baseY:+y,timer:0,fall:0,phase:phaseGroup%2,gate:layout.gates?.[id],control:layout.controls?.[id],belt:index%2?-82:82});end=x+Number(w);
   }
   const route=platforms.slice();
   for(const n of layout.check){const a=route[n];checkpoints.push({x:a.x+38,y:a.y-PHYS.height,platform:a.id});}
-  for(const [n,type,key,label,sign]of layout.devices){const a=route[n];objects.push({id:key,type,key,label,n:sign,x:a.x+a.w*.64,y:a.y,platform:a.id});required.push(key);}
+  for(const [n,type,key,label,sign]of layout.devices){const a=route[n];objects.push({id:key,type,key,label:type==='dial'?'Halkayı ritimde sabitle':label,lines:key==='long-memory'?def.walk:null,n:sign,x:a.x+a.w*.64,y:a.y,platform:a.id});required.push(key);}
   const clockAt=new Set();
   for(let n=0;n<route.length;n++)if(route[n].type==='phase'&&route[n-1]?.type!=='phase')clockAt.add(n-1);
   if(index===4||index===10)for(const n of layout.check)clockAt.add(n);
@@ -29,9 +29,10 @@ const RoadEngine=(()=>{
  function createPlayer(x=85,y=384){return {x,y,vx:0,vy:0,w:26,h:58,ground:null,coyote:0,buffer:0,facing:1,steps:0};}
  function solid(p,state){return p.fall<1&&(p.type!=='phase'||p.phase===state.phase)&&(p.type!=='gate'||state.tasks?.[p.gate]);}
  function waterLine(world,state){return ['water','lantern'].includes(world.def.mechanic)?480+Math.sin(state.time*.5)*28+(state.tasks?.sluice?48:0):740;}
+ function wind(world,state){return ['wind','mixed','final'].includes(world.def.mechanic)?(Math.sin(state.time*.8)*52+Math.sin(state.time*2.1)*9)*(state.assist?.62:1):0;}
  function hazard(h,time){
-  if(h.type==='steam'){const t=(time+h.offset)%4;return {x:h.x-16,y:h.y-74,w:32,h:74,active:t>=2.2&&t<3.2,warning:t>=1.4&&t<2.2};}
-  const angle=Math.sin(time*1.55+h.offset)*.65;return {x:h.x+Math.sin(angle)*112,y:h.y-128+Math.cos(angle)*112,r:15,active:true};
+  if(h.type==='steam'){const t=(time+h.offset)%4;return {x:h.x-16,y:h.y-74,w:32,h:74,active:t>=2.05&&t<3.45,warning:t>=1.35&&t<2.05};}
+  const angle=Math.sin(time*1.7+h.offset)*.65;return {x:h.x+Math.sin(angle)*112,y:h.y-128+Math.cos(angle)*112,r:15,active:true};
  }
  function touches(p,h){if(h.r){const x=Math.max(p.x,Math.min(h.x,p.x+p.w)),y=Math.max(p.y,Math.min(h.y,p.y+p.h));return (x-h.x)**2+(y-h.y)**2<h.r*h.r;}return p.x+p.w>h.x&&p.x<h.x+h.w&&p.y+p.h>h.y&&p.y<h.y+h.h;}
  function step(world,p,input,state,dt){
@@ -39,15 +40,15 @@ const RoadEngine=(()=>{
   for(const a of world.platforms){const ox=a.x,oy=a.y,t=state.time;
    if(a.type==='moving')a.x=a.baseX+(!a.control||state.tasks[a.control]?Math.sin(t*1.15)*34:0);
    if(a.type==='swing'){a.x=a.baseX+Math.sin(t*1.35)*43;a.y=a.baseY+(1-Math.cos(t*2.7))*5;}
-   if(a.type==='lift')a.y=a.baseY+Math.sin(t*1.25)*65;
+   if(a.type==='lift')a.y=a.baseY+(!a.control||state.tasks[a.control]?Math.sin(t*1.25)*65:0);
    if(a.type==='raft')a.y=a.baseY+Math.sin(t*1.1)*17;
    if(p.ground===a.id&&solid(a,state)){p.x+=a.x-ox;p.y+=a.y-oy;oldBottom=p.y+p.h;}
-   if(a.type==='crumble'&&a.timer>0){a.timer+=dt;if(a.timer>(state.assist?.76:.53))a.fall+=dt*3.6;}
+   if(a.type==='crumble'&&a.timer>0){a.timer+=dt;if(a.timer>(state.assist?.76:.46))a.fall+=dt*3.6;}
   }
   for(const o of world.objects){const a=world.platforms[o.platform];if(a){o.x+=(a.x-(o.lastX??a.baseX));o.y=a.y;o.lastX=a.x;}}
   p.coyote=grounded?.105:Math.max(0,p.coyote-dt);p.buffer=Math.max(0,p.buffer-dt);if(input.jumpPressed)p.buffer=.14;
   p.vx=(Number(input.right)-Number(input.left))*PHYS.speed;if(p.vx)p.facing=Math.sign(p.vx);if(state.assist)p.vx*=.9;
-  if(['wind','mixed','final'].includes(world.def.mechanic))p.vx+=Math.sin(state.time*.8)*32;
+  p.vx+=wind(world,state)*(grounded?.8:1);
   if(grounded&&support?.type==='conveyor')p.vx+=support.belt;
   if(p.buffer>0&&p.coyote>0){const spring=support?.type==='spring';p.vy=-(spring?PHYS.spring:PHYS.jump)*(state.assist?1.08:1);p.buffer=0;p.coyote=0;p.ground=null;state.jumped=true;}
   if(!input.jump&&p.vy<-220)p.vy+=PHYS.gravity*dt*1.6;
@@ -68,6 +69,6 @@ const RoadEngine=(()=>{
   return p.y+p.h>waterLine(world,state)||p.y>720;
  }
  function resetPlatforms(world,state){for(const p of world.platforms){p.timer=0;p.fall=0;}if(world.crate&&!state?.tasks?.crate)world.crate.x=world.crate.startX;}
- return {PHYS,makeLevel,createPlayer,solid,step,resetPlatforms,hazard,waterLine,touches};
+ return {PHYS,makeLevel,createPlayer,solid,step,resetPlatforms,hazard,waterLine,touches,wind};
 })();
 if(typeof module!=='undefined')module.exports=RoadEngine;

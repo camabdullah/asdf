@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict'),{LEVELS}=require('../story.js'),P=require('../progress.js'),Q=require('../puzzles.js'),E=require('../engine.js');
+const old={version:1,layoutVersion:4,current:14,unlocked:14,completed:[0,11,12,13],memories:['12:memory','14:memory'],seen:['0:intro','12:outro','13:intro','14:outro'],states:{14:{checkpoint:3,tasks:{seal0:true,seal1:true},actor:'sen',phase:1},13:{checkpoint:2,tasks:{relay0:true},actor:'damla'}},volume:.25};
+const {save:v,migrated}=P.migrate(old,LEVELS);assert.ok(migrated);assert.equal(v.current,15);assert.equal(v.unlocked,15);assert.deepEqual(v.completed,[0,11,13,14]);assert.deepEqual(v.memories,['13:memory','15:memory']);assert.deepEqual(v.seen,['0:intro','13:outro','14:intro','15:outro']);assert.equal(v.states[15].checkpoint,3);assert.equal(v.states[15].tasks.seal0,true);assert.equal(v.states[14].actor,'damla');assert.equal(v.volume,.25);assert.equal(v.states[12],undefined);
+assert.deepEqual(P.migrate(v,LEVELS).save,v,'migration is idempotent');assert.equal(P.migrate(v,LEVELS).migrated,false);
+const ancient=P.migrate({...old,layoutVersion:1,memories:['14:memory0','14:memory1']},LEVELS).save;assert.deepEqual(ancient.memories,['15:memory']);assert.equal(ancient.states[15].checkpoint,0);assert.equal(P.migrate(null,LEVELS).save.layoutVersion,5);
+assert.equal(Q.coffeeOK({drink:1,milk:1,cups:2}),true);for(const bad of [{drink:0,milk:1,cups:2},{drink:1,milk:0,cups:2},{drink:1,milk:1,cups:1}])assert.equal(Q.coffeeOK(bad),false);
+assert.ok(Q.tableOK([1,0],[1,0],0,true));assert.ok(!Q.tableOK([1,0],[0,0],0,true));assert.ok(!Q.tableOK([1,0],[1,0],1,true));
+assert.ok(Q.inWindow(.85/2.4));assert.ok(!Q.inWindow(1));
+const w=E.makeLevel(2,LEVELS[2]);let peak=0;for(let n=0;n<1500;n++)peak=Math.max(peak,Math.abs(E.wind(w,{time:n/100,assist:false})));assert.ok(peak>50&&peak<=61);assert.ok(Math.abs(E.wind(w,{time:1,assist:true}))<Math.abs(E.wind(w,{time:1,assist:false})));
+console.log('PASS: legacy save numbering/checkpoints/actor/audio preserved; coffee, shared ayran, timing window, and stronger wind');

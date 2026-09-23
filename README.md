@@ -1,8 +1,8 @@
 # Sana Gelen Yol
 
-[Güncel oyunu aç](https://camabdullah.github.io/asdf/?v=4)
+[Güncel oyunu aç](https://camabdullah.github.io/asdf/?v=5)
 
-Damla ve senin hikâyenden beslenen, dokunmatik kontrollü 2D platform ve çevre bulmacası oyunu. Beş dünya ve on beş bölüm, açılıştan **Sevgilime Bir Kefen** finaline kadar oynanabilir bir ilk sürüm olarak uygulanmıştır.
+Damla ve senin hikâyenden beslenen, dokunmatik kontrollü 2D platform ve çevre bulmacası oyunu. Altı dünya ve on altı bölüm, Koru’daki açılıştan **Sevgilime Bir Kefen** finaline kadar oynanabilir.
 
 ## Oynama
 
@@ -14,35 +14,39 @@ iPhone’da Safari ile bağlantıyı açıp telefonu yatay tut. Uygulama yüklem
 - Ⅱ: duraklatma, ses ve isteğe bağlı zıplama yardımı.
 - Bilgisayar: A/D veya oklar, Boşluk, E, Esc. Diyaloglarda Enter.
 
-Her bölümün kendine özgü zorunlu görevi ve tek bir isteğe bağlı anısı var. Ekranın üstündeki görevleri tamamlamadan çıkış açılmaz. Sandıkları sağa doğru iterek yerdeki plakaya yerleştir. Yaylı platformlarda zıplamayı basılı tut. Buhar çıkmadan önce sarı uyarı belirir; sarkacın ritmini izleyerek geç. Saatler yalnızca zaman bulmacası olan bölümlerde kullanılabilir. Kesik çizgili platformlar öteki zamanda katılaşır. Çatlak zeminler üzerinde oyalanma. Hareketli platform için uygun anı bekle.
+Her bölümün zorunlu görevleri ve bir isteğe bağlı anısı var. Ekranın üstündeki görevleri tamamlamadan çıkış açılmaz. Sandıkları yerdeki plakaya it. Yaylı platformlarda zıplamayı basılı tut. Buhar çıkmadan önce sarı uyarı belirir; sarkacın ritmini izleyerek geç. Kesik çizgili platformlar öteki zamanda katılaşır. Çatlak zeminlerde oyalanma. Güçlenen rüzgârın yönünü üstteki göstergeden takip et.
 
-Damla 8 ve 9. bölümlerde oynanır. 14. bölümün ilk halkasından sonra kontrol yeniden ona geçer. Restoranda Damla’nın Kremantar’ını ve senin Barbeküs’ünü hatırla. 11. bölümde doğru akşamı da seçmek gerekir.
+Damla 8 ve 9. bölümlerde oynanır. 15. bölümün ilk halkasından sonra kontrol yeniden ona geçer. Restoranda Damla’nın Kremantar’ını, senin Barbeküs’ünü ve tek ayranı hatırla. Damla içecek sipariş etmez; senin ayranından içer. 11. bölümde doğru akşamı da seçmek gerekir.
 
-Kayıtlar aynı tarayıcı ve cihazda `localStorage` ile tutulur. Kontrol noktaları, izler, mekanizmalar, bölüm ilerlemesi, izlenen sahneler ve anılar saklanır. Düşmek geçmişi değiştirmez. Sekme arka plana geçtiğinde oyun durur. Tarayıcı verileri silinirse kayıt kaybolabilir.
+13. bölüm Caffelab’da geçer: iki laktozsuz latte seç, buhar vanasını aç, makinenin ibresini iki kez yeşil aralıkta durdur ve fincanları pencere masasına ulaştır. Bazı bölüm sonlarında da ritim halkasını sabitlemek gerekir. Başarısız zamanlama yeniden denenebilir; uygulama arka plana geçince ibre durur.
 
-## Bu sürümün kapsamı
+Kayıtlar aynı tarayıcı ve cihazda tutulur. Kontrol noktaları, mekanizmalar, bölüm ilerlemesi, izlenen sahneler ve anılar saklanır. Düşmek geçmişi değiştirmez. Sekme arka plana geçtiğinde oyun durur. Tarayıcı verileri silinirse kayıt kaybolabilir.
 
-- 15 ayrı tasarlanmış rota, 203 zorunlu platform geçişi, 15 farklı toplanabilir anı.
-- Salıncak, yaylı platform, yönlü servis bandı, dikey asansör, yüzen iskele, zamanlı buhar ve sarkaç. İtilebilir sandık, basınç plakası, açılan köprü, su savağı, tramvay makası ve sipariş bulmacaları.
-- 30 tekrar izlenebilir açılış/kapanış sahnesi; okunarak ilerleyen diyaloglar, katmanlı çizimler, nefes/yürüme, yağmur ve ışık animasyonları.
-- Finalde bağlantıyı kapatma işlemi, sonucu önceden anlatılan ayrı bir etkileşimdir. Toplanan anılar finali değiştirmez.
-- Fotoğraflardan uyarlanan vektör karakterler ve diyalog portreleri. Kullanıcının sağladığı üç MP3 15 bölümün tamamına dağıtılmıştır ve bölüm bazında yüklenir. Çerez, izleme, dış font veya oyun kütüphanesi yok.
+## v5 ile gelenler
 
-Bu bir ilk oynanabilir sürümdür. **1,5–2 saatlik hedef süre ölçülüp doğrulanmış değildir.** 10–60 saniyelik tamamlanmış sinematik prodüksiyon yerine oyuncunun ilerlettiği animasyonlu diyalog sahneleri vardır. Karakterler gönderilen fotoğraflar esas alınarak stilize vektör çizimleriyle yeniden tasarlanmıştır. Erkek karakterin son fotoğrafına göre daha geniş yüz, daha sakin gözler, belirgin bıyık/sakal, gri tutamlı dalgalı saç ve lacivert polo; Damla’da uzun koyu saç, ince perçemler ve siyah kapüşonlu kullanılır. Fotoğrafların asılları depoya eklenmez. Çevreler de stilize vektör çizimleridir; elle boyanmış son sanat üretimi bu sürümde tamamlanmış değildir. Gerçek iPhone/Safari performansı ve uzun oyun oturumu ayrıca denenmelidir.
+- 16 ayrı rota, toplam 329 zorunlu platform geçişi ve 16 toplanabilir anı. Önceki 15 bölümün yolları uzatıldı; her birine yeni bir hatıra konuşması veya ritim görevi eklendi.
+- Koru’da çatlağın büyüdüğü, bankın ve yolların ayrıldığı 14 saniyelik açılış animasyonu.
+- Bölüm aralarında 15 geçiş filmi: 11–15 saniyelik tramvay, yağmur, park, kapı, restoran ve kahve sahneleri. Üç geçiş siyah beyaz VTR biçiminde park, yemek ve kahve anılarından oluşur.
+- Tek ayranı paylaşma sahnesi 8 saniye, iki latteyi masaya bırakma sahnesi 9 saniyedir.
+- Açılış/kapanış konuşmaları, izlenen geçiş filmleri ve yarılma sahnesi arşivden yeniden izlenebilir. Ana menüde açılışı tekrar izleme düğmesi vardır. Animasyonlar duraklatılabilir ve atlanabilir.
+- Daha güçlü rüzgâr, daha hızlı servis bantları, daha erken çöken platformlar, zamanlı buhar ve sarkaçlar. Kontrol noktaları ve isteğe bağlı yardım korunur.
+- Finalde müzik kesilmez. Tek başına bankta istenildiği kadar kalınabilir; anılar menüsü açılırken de müzik sürer.
 
-Koru dışındaki şehir ayrıntıları, paylaşıldığı belirtilmeyen konuşmalar, ikinci restoran ziyareti ve final repliği özgün kurgudur. Damla’nın bugünkü düşünceleri hakkında iddia taşımaz. “Şamdanları Donanınca” bir hatıra olarak anılır; kaydı, melodisi ve sözleri kullanılmaz. İsmet Özel’in dört eserinden kısa alıntılar geçişlerde yer alır. [Alıntılar ve kaynakları](POETRY.md). Bunlara eşlik eden karakter konuşmaları özgün kurgudur.
+**1,5–2 saatlik hedef süre henüz oyuncu testleriyle doğrulanmadı.** Çevreler, karakterler ve animasyonlar stilize Canvas çizimleridir. Siyah beyaz VTR sahneleri gerçek video kayıtları değil, anılardan esinlenen çizim canlandırmalarıdır. Gerçek iPhone/Safari performansı ve uzun oyun oturumu ayrıca denenmelidir.
+
+Karakterler gönderilen fotoğraflar esas alınarak tasarlanmıştır. Erkek karakterde gri tutamlı dalgalı saç, belirgin bıyık/sakal ve lacivert polo; Damla’da uzun koyu saç, ince perçemler ve siyah kapüşonlu kullanılır. Fotoğrafların asılları depoya eklenmez.
+
+Kullanıcının paylaştığı yemek/kahve alışkanlıkları dışında gerçek olarak belirtilmeyen konuşmalar, mekân ayrıntıları, ikinci restoran ziyareti ve final repliği oyun için yazılmış kurgudur. Damla’nın bugünkü düşünceleri hakkında iddia taşımaz. “Şamdanları Donanınca” bir hatıra olarak anılır; kaydı, melodisi ve sözleri kullanılmaz. İsmet Özel’in dört eserinden kısa alıntılar geçişlerde yer alır. [Alıntılar ve kaynakları](POETRY.md).
 
 ## Bölüm müzikleri
 
 | Kayıt | Bölümler |
 |---|---|
-| Yann Tiersen — Naval | 1, 3, 8, 10 |
-| Jóhann Jóhannsson — The Rocket Builder | 2, 4, 6, 7, 9, 13 |
-| Max Richter — On the Nature of Daylight | 5, 11, 12, 14, 15 |
+| Yann Tiersen — Naval | 1, 3, 8, 10, 13 |
+| Jóhann Jóhannsson — The Rocket Builder | 2, 4, 6, 7, 9, 14 |
+| Max Richter — On the Nature of Daylight | 5, 11, 12, 15, 16 |
 
-Kayıtlar kullanıcı tarafından sağlanan MP3 dosyalarıdır. Yalnızca gereken parça yüklenir; döngüde çalar, diyaloglarda kısılır, duraklatma ve arka plana geçişte durur. Son bank sahnesinde müzik susar. Safari sesi engellerse “Müziği başlat” düğmesine dokun.
-
-Açılış konuşması Tavuk Dünyası, Kremantar ve Barbeküs üzerinden yeniden yazıldı. Finalde aynı konuşmanın devamı duyulur.
+Kayıtlar kullanıcı tarafından sağlanan MP3 dosyalarıdır. Yalnızca gereken parça yüklenir; döngüde çalar, diyaloglarda kısılır. Duraklatma ve arka plana geçişte durur. Finalin son bank sahnesinde ve anılar menüsünde çalmaya devam eder. Safari sesi engellerse “Müziği başlat” düğmesine dokun.
 
 ## Hikâye haritası
 
@@ -57,36 +61,40 @@ Açılış konuşması Tavuk Dünyası, Kremantar ve Barbeküs üzerinden yenide
 | 7 | Yolunu biri hazırlamış | Bağlı kol ve üç fener |
 | 8 | Fenerleri Damla hazırladı | 7. bölümde kullanılan geçitler |
 | 9 | Yolculukların sırası ters | 2. bölümdeki not şimdi yazılır |
-| 10 | Sipariş masayı tanımlar | Kremantar, Barbeküs, yıldızlı peçete |
+| 10 | Sipariş masayı tanımlar | Kremantar, Barbeküs, tek ayran |
 | 11 | Tekrar sanılan iki farklı akşam | Mavi atkı, peçete, değişen sessizlik |
 | 12 | Anılar değişmedi; yollar karıştı | Küçük kapının kuralı yeniden görülür |
-| 13 | Son geçit döngüyü açık tutuyor | Önceki bütün mekanikler birleşir |
-| 14 | Kapatmanın bedeli son bağlantıdır | Halkalar iki karakterle tamamlanır |
-| 15 | Damla yaşıyor, ikiniz de çıkabilirsiniz | Kapanan kapının nedeni; ilk konuşmanın devamı |
+| 13 | Caffelab’da birlikte geçirilen zaman | İki laktozsuz latte, pencere masası |
+| 14 | Son geçit döngüyü açık tutuyor | Önceki bütün mekanikler birleşir |
+| 15 | Kapatmanın bedeli son bağlantıdır | Halkalar iki karakterle tamamlanır |
+| 16 | Damla yaşıyor, ikiniz de çıkabilirsiniz | Kapanan kapının nedeni; ilk konuşmanın devamı |
 
-Gerçek anıların sırası kullanıcı ayrıntılarıyla tamamlanmalıdır. Geçmiş değişmez; oynanış başarısızlıkları anlatı döngüsü değildir.
+Geçmiş değişmez; oynanış başarısızlıkları anlatı döngüsü değildir.
 
-## Geliştirme
+## Geliştirme ve doğrulama
 
-Derleme veya paket kurulumu gerekmez. Depo kökünü herhangi bir statik HTTP sunucusunda aç. GitHub Pages: `main` dalı, `/ (root)`.
+Derleme veya paket kurulumu gerekmez. Depo kökünü herhangi bir statik HTTP sunucusunda aç. GitHub Pages: main dalı, / (root). Dış font, oyun kütüphanesi veya izleme yok.
 
-- `index.html`, `style.css`: arayüz ve dokunmatik düzen.
-- `story.js`: 15 bölümün konuşmaları, görevleri ve dünya paletleri.
-- `levels.js`: her bölüme özel rota, düzenek ve tehlike yerleşimi.
-- `engine.js`: sabit zaman adımlı fizik, platformlar, sandık ve tehlike çarpışmaları.
-- `game.js`: kayıt, etkileşimler, ses, çizim ve menüler.
-- `characters.js`: fotoğraflardan uyarlanan hareketli karakterler ve büyük portreler.
-- `music.js`: bölüm müzikleri, ses seviyesi, duraklatma ve Safari oynatma yönetimi.
-- `tests/`: Node.js ile çalıştırılan fizik ve kampanya kontrolleri.
+- index.html, style.css: arayüz ve dokunmatik düzen.
+- story.js: 16 bölümün konuşmaları, görevleri ve dünya paletleri.
+- levels.js: bölümlere özel rota, düzenek ve tehlike yerleşimi.
+- engine.js: sabit zaman adımlı fizik, platformlar, sandık ve tehlike çarpışmaları.
+- game.js: etkileşimler, çizim, menüler ve ses/sahne akışı.
+- characters.js: fotoğraflardan uyarlanan hareketli karakterler ve portreler.
+- cinema.js: zamanla ilerleyen Canvas animasyonları ve VTR efektleri.
+- progress.js: kayıt yapısı ve önceki sürümlerden geçiş.
+- puzzles.js: masa, latte siparişi ve ritim bulmacalarının kuralları.
+- music.js: bölüm müzikleri, ses seviyesi ve Safari oynatma yönetimi.
 
-```sh
+Testleri Node.js ile çalıştır:
+
+~~~sh
 node tests/engine.cjs
 node tests/campaign.cjs
 node tests/music.cjs
-```
+node tests/progress-puzzles.cjs
+~~~
 
-Fizik testi her zorunlu geçiş için gerçek fizik motoruyla uygun kalkış/zamanlama arar; insan oynayışının veya toplam süre ölçümünün yerine geçmez. Kampanya testi denetimli bir DOM modeli içinde hikâye, masa, kayıt, duraklatma ve final akışlarını sınar. Tarayıcıda masaüstü ve 844×390 yatay ekran düzeni görsel olarak kontrol edilmiştir.
+Fizik testi 329 zorunlu geçiş için gerçek motorla uygun kalkış/zamanlama arar; insan oynayışının veya toplam süre ölçümünün yerine geçmez. Kampanya testi denetimli DOM içinde görevler, sandık, masa/ayran, latte, ritim, sahne arşivi, kayıt, duraklatma ve final müziğini sınar. Tarayıcıda 844×390 yatay düzende açılış, VTR, kahve bulmacası ve final görsel olarak kontrol edilmiştir.
 
-v4 kayıt geçişi: tamamlanan bölümler, açılan bölümler, izlenen sahneler ve anılar korunur. Haritalar değiştiği için eski sürümdeki bölüm içi kontrol noktası sıfırlanır; devam edilen bölümün girişinden başlanır. Üç kez toplanmış aynı anı defterde tek anıya dönüştürülür.
-
-Sonraki kişiselleştirme: karakter adı, parkın görüntüsü, Bartın/Eskişehir’in anlamı, gerçek şakalar ve Damla’nın paylaşılacak ses kaydı.
+v5 kayıt geçişi: Caffelab, eski 12. bölümden sonraya eklenir. Eski 13–15. bölümlerin kayıtları yeni 14–16. bölümlere taşınır. Tamamlanan bölümler, anılar, izlenen sahneler ve v4 kontrol noktaları korunur; uzatılan kısımlar eski rotaların sonundadır. v4 öncesindeki çok eski bölüm içi kayıtlar güvenli giriş noktasına alınır. Aynı anının eski kopyaları tek kayda dönüştürülür.

@@ -19,4 +19,25 @@ const ROAD_LAYOUTS=[
  {route:'s,0,442,390 s,70,390,160 g,25,390,190 s,40,390,300 l,95,435,115 s,90,350,150 w,95,390,108 s,90,430,330 s,60,442,460 m,100,405,130 s,90,350,160 s,85,402,320 s,70,442,360',check:[0,3,7,8,11],devices:[[1,'lever','relay0','İlk halkayı kur',0],[7,'switch','relay1','Damla’nın kolunu çek',1],[11,'light','relay2','Çıkış ışığını yak',2]],gates:{2:'relay0'},crate:8,hazards:[[3,'steam']],memory:10,goal:'İlk halkayı sen kur; kontrol Damla’ya geçsin. Onun tarafındaki iki düzeneği tamamla.'},
  {route:'s,0,442,400 c,0,442,260 w,95,400,100 s,95,350,250 b,85,400,100 s,100,250,220 s,80,320,140 p,95,370,115 s,85,420,330 f,110,380,96 m,95,350,125 s,90,400,340 g,25,400,210 s,40,400,180 s,85,442,450',check:[0,3,5,8,11],devices:[[3,'switch','seal0','İlk halkayı sabitle',0],[8,'switch','seal1','İkinci halkayı sabitle',1],[11,'lever','seal2','Son bağlantıyı hazırla',2]],gates:{12:'seal2'},hazards:[[1,'steam'],[6,'pendulum']],memory:5,goal:'Öğrendiğin engelleri son kez aş. Üç halkayı hazırla; son geçidi bilerek kapat.'}
 ];
+
+// These extra routes continue the existing checkpoint geometry, so v4 saves remain usable.
+const LONG_ROUTES=[
+ 'w,90,402,112 s,90,360,170 f,105,397,102 s,100,442,300 b,90,430,100 s,100,280,200 s,90,352,150 s,85,420,370',
+ 'f,115,403,94 s,100,357,125 f,105,396,92 s,95,442,310 c,0,442,280 s,110,390,112 s,100,442,360',
+ 'w,105,400,100 s,95,345,160 c,55,400,240 s,100,442,300 w,115,403,100 s,100,350,145 s,100,410,350',
+ 'm,95,404,125 s,100,357,160 s,65,410,330 c,0,410,250 m,105,392,120 s,105,350,145 s,95,412,370',
+ 'p,95,403,112 s,95,360,160 l,85,415,110 s,90,350,300 p,105,312,100 s,100,370,145 s,95,430,350',
+ 'f,105,396,102 s,100,346,160 s,85,406,300 w,110,400,100 s,105,350,130 s,95,410,350',
+ 'r,100,410,115 s,100,355,150 r,95,404,120 s,80,442,300 r,110,398,112 s,100,352,130 s,100,418,370',
+ 'r,100,405,118 f,95,364,96 s,90,414,300 w,110,382,100 s,105,338,140 s,95,405,370',
+ 'f,110,398,94 w,100,365,108 s,100,420,300 c,0,420,275 s,110,365,120 f,110,408,96 s,100,442,350',
+ 'c,0,442,290 s,112,390,105 s,100,341,140 s,80,403,350 b,100,420,100 s,95,270,210 s,90,343,130 s,100,410,370',
+ 'p,105,400,110 s,100,350,135 s,85,402,330 l,95,420,110 s,100,345,150 p,110,390,105 s,100,442,370',
+ 'c,0,442,280 s,110,386,112 f,108,347,94 s,98,402,330 w,110,370,105 s,100,414,350',
+ 'w,110,400,100 f,110,358,94 s,100,410,310 p,110,365,105 s,100,320,140 m,100,366,118 s,105,420,370',
+ 'l,100,430,115 s,90,350,155 s,80,414,310 w,112,380,102 f,110,340,96 s,100,402,360',
+ 'w,110,400,102 s,100,350,150 p,108,395,100 s,90,442,330 b,100,425,100 s,100,275,200 f,95,348,96 s,105,407,370'
+];
+ROAD_LAYOUTS.forEach((d,i)=>{const offset=d.route.split(' ').length;const extra=LONG_ROUTES[i].split(' ');d.originalCount=offset;d.route+=' '+LONG_ROUTES[i];const rest=extra.findIndex((t,n)=>t.startsWith('s,')&&+t.split(',')[3]>=300);d.check.push(offset+rest);const last=offset+extra.length-1;d.check.push(last);d.devices.push([last,'echo','long-memory','Dinlen ve hatırla',0]);d.goal+=' Son patikadaki hatırayı dinle.';if([2,3,4,12,14].includes(i))d.devices[d.devices.length-1][1]='dial';});
+ROAD_LAYOUTS.splice(12,0,{route:'s,0,442,420 c,0,442,270 s,100,390,140 s,80,425,340 g,25,425,180 s,45,380,145 l,100,425,118 s,95,350,170 s,80,410,330 c,0,410,260 s,115,355,108 f,110,397,94 s,100,442,350 s,100,385,130 s,100,340,145 s,80,400,340 g,25,400,200 s,45,400,180 w,108,363,108 s,100,415,340 c,0,415,280 s,110,360,120 s,100,410,380',check:[0,3,8,12,15,19,22],devices:[[3,'coffee','latte-order','İki latte sipariş et',0],[5,'lever','pressure','Buhar vanasını aç',1],[15,'brew','latte-brew','İki fincanı hazırla',1],[22,'serve','latte-serve','Latteyi masaya bırak',2]],gates:{4:'latte-order',16:'latte-brew'},controls:{6:'pressure'},hazards:[[1,'steam'],[9,'steam'],[20,'steam']],memory:14,goal:'İki laktozsuz latte seç. Buhar vanasını aç, basıncı iki kez yeşil aralıkta durdur ve pencere masasına ulaş.'});
 if(typeof module!=='undefined')module.exports=ROAD_LAYOUTS;

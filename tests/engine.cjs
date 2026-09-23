@@ -15,7 +15,7 @@ function reachable(w,a,b){
  }
  return false;
 }
-for(let i=0;i<15;i++){
+for(let i=0;i<LEVELS.length;i++){
  const w=E.makeLevel(i,LEVELS[i]);assert.ok(w.checkpoints.length>=4);assert.equal(w.objects.filter(o=>o.type==='memory').length,1);assert.equal(w.objects.filter(o=>o.type==='exit').length,1);assert.ok(w.required.length>=1);
  for(let j=1;j<w.route.length;j++){transfers++;if(!reachable(w,w.route[j-1],w.route[j]))failed.push({level:i+1,from:j-1,to:j,kind:w.route[j].type,gap:w.route[j].x-w.route[j-1].x-w.route[j-1].w,dy:w.route[j].y-w.route[j-1].y});}
  const high=w.platforms.at(-1),below=w.route.find(p=>p.x<=high.x&&p.x+p.w>high.x);assert.ok(reachable(w,below,high),'optional memory '+i);
@@ -25,5 +25,5 @@ for(let i=0;i<15;i++){
 function jumpHeight(held,spring=false){const w=E.makeLevel(0,LEVELS[0]);w.hazards=[];if(spring)w.platforms[0].type='spring';const p=E.createPlayer(100,384);p.ground=0;let min=p.y;const s=makeState(w);for(let n=0;n<150;n++){s.time+=1/120;E.step(w,p,{right:false,left:false,jump:n<held,jumpPressed:n===0},s,1/120);min=Math.min(min,p.y);}return 384-min;}
 assert.ok(jumpHeight(100)>jumpHeight(5)+35);assert.ok(jumpHeight(100,true)>180);
 const w=E.makeLevel(9,LEVELS[9]),s=makeState(w);s.tasks={};const c=w.crate,p=E.createPlayer(c.x-30,c.floor-58);p.ground=c.platform;for(let n=0;n<300;n++){s.time+=1/120;E.step(w,p,{right:true,left:false,jump:false},s,1/120);}assert.ok(s.tasks.crate,'pushing a real crate opens its wall');
-const steam={type:'steam',x:100,y:442,offset:0};assert.equal(E.hazard(steam,1).active,false);assert.equal(E.hazard(steam,1.8).warning,true);assert.equal(E.hazard(steam,2.5).active,true);assert.equal(E.hazard(steam,3.4).active,false);assert.ok(E.touches({x:100,y:400,w:26,h:40},E.hazard(steam,2.5)));assert.ok(!E.touches({x:100,y:260,w:26,h:58},E.hazard(steam,2.5)));
-console.log(JSON.stringify({levels:15,mandatoryTransfers:transfers,unreachable:failed,shortJump:jumpHeight(5),longJump:jumpHeight(100),springJump:jumpHeight(100,true)},null,2));assert.equal(failed.length,0);
+const steam={type:'steam',x:100,y:442,offset:0};assert.equal(E.hazard(steam,1).active,false);assert.equal(E.hazard(steam,1.8).warning,true);assert.equal(E.hazard(steam,2.5).active,true);assert.equal(E.hazard(steam,3.6).active,false);assert.ok(E.touches({x:100,y:400,w:26,h:40},E.hazard(steam,2.5)));assert.ok(!E.touches({x:100,y:260,w:26,h:58},E.hazard(steam,2.5)));
+console.log(JSON.stringify({levels:LEVELS.length,mandatoryTransfers:transfers,unreachable:failed,shortJump:jumpHeight(5),longJump:jumpHeight(100),springJump:jumpHeight(100,true)},null,2));assert.equal(failed.length,0);

@@ -107,4 +107,37 @@ LEVELS[13].outro.push(['İSMET ÖZEL · SEVGİLİME BİR KEFEN','“yüreğimin 
 LEVELS[0].signs[0]=['SEN','Yolun üstüne düşmüş ağacı çevirebilirsem köprü olur. Belediye işi bize kaldı, dostuuum.'];
 LEVELS[4].signs[2]=['SEN','İki akşamın saati hizalandı. Aynı yere varmak, aynı zamanda varmak değilmiş.'];
 LEVELS[6].signs[0]=['SEN','Savağı açtım. Su çekilince fenerlerin gösterdiği iskele ortaya çıktı. Biri yolu önceden hazırlamış.'];
+
+WORLDS.splice(4,0,{name:'Ankara / Caffelab',short:'CAFFELAB',sky:['#242c34','#827466','#ceb08d'],land:'#51453e',leaf:'#68695d',accent:'#eac49b',type:'coffee'});
+for(const d of LEVELS)if(d.w===4)d.w=5;
+const caffelab={title:'İki Latte, Biraz Daha Zaman',w:4,actor:'sen',mechanic:'coffee',seed:47,
+ goal:'İki laktozsuz latte hazırla. Makinenin ritmini yakala ve fincanları pencere masasına götür.',
+ intro:[['ANLATICI','Caffelab. Kapı açıldığında dışarıdaki ses biraz geride kalıyor.'],['DAMLA','Dostuuum, iki latte.'],['SEN','Laktozsuz. Onu söyleyecektim.'],['DAMLA','Bay Aptullah çok bilmiş, onu ben de söyleyecektim.'],['SEN','Siparişi iki kişi veriyoruz. Kahve aynı, organizasyon büyük.'],['ANLATICI','Makinenin buharı camı örtüyor. Silinince tezgâhın parçaları birbirinden uzaklaşmış.']],
+ signs:[['SEN','İki fincan. İkisi de latte, ikisi de laktozsuz. Bunu unutacak kadar uzaklaşmadım.'],['SEN','Basınç yeşil aralıktayken sabitle. Acele edersem sadece buharı dinleyeceğim.'],['DAMLA’NIN İZİ','“Pencere tarafındayım. Kahveler gelene kadar buradayım, dostuuum.”']],
+ outro:[['SEN','İki latte. Şeker konuşması yapmıyorum, bugünlük yeterince karar verdik.'],['DAMLA','Bir kahveye bu kadar yol yürüdük.'],['SEN','Kahve bahane demeyeceğim. Kahve de önemli.'],['ANLATICI','İki fincandan yükselen buhar, camdaki iki çizgiyi bir anlığına birbirine bağlıyor.']],
+ memory:['Fincanın izi','Caffelab’da ikiniz de laktozsuz latte içerdiniz. Fincanların masada bıraktığı iki halka, bu sahnede yan yana kalıyor.'],
+ walk:[['SEN','Biraz oturalım demek, bazen bütün günün en iyi fikriydi.'],['DAMLA’NIN İZİ','“Kahven soğuyor.”'],['SEN','Biliyorum. Yine de biraz daha oturacağım.']]};
+LEVELS.splice(12,0,caffelab);
+const walkTalks=[
+ [['SEN','Parkın çıkışı burada değildi. Bir ağacı bile yanlış hatırlamıyorum; yolu yanlış buluyorum.'],['DAMLA’NIN İZİ','“Kestirme diye çıktığımız yerde yine merdiven var mı?”'],['SEN','Var. Bu konuşmayı duyabilmek için bile çıkarım.']],
+ [['SEN','Notun köşesi yırtılmış; harflerin yarısı yerinde.'],['SEN','Yine de senin yazdığını anlıyorum. Bazı seslerin kâğıtta da sesi var.'],['ANLATICI','Mandalı yerine bırakıyorsun. Başka bir akşamda burada kalacak.']],
+ [['SEN','O bankta oturan ben, biraz sonra nereye gideceğini biliyor sanıyor.'],['SEN','Yanına gidip bir şey söyleyebilsem...'],['ANLATICI','Söylemiyorsun. O akşam yaşandığı hâliyle kalıyor.']],
+ [['SEN','İki biletin arasından bir kahve fişi çıktı. Şehirler ceplerde birbirine karışıyor.'],['DAMLA’NIN İZİ','“Bir durak yürürüz.”'],['SEN','Bir durak dediğin bazen güzel bir bahaneydi.']],
+ [['SEN','Saatin akrebi aynı yeri gösteriyor, gölgeler başka yere düşüyor.'],['SEN','Demek bulmam gereken yalnızca köprü değil.'],['ANLATICI','İki farklı akşamın suyu, aynı taşın altından geçiyor.']],
+ [['SEN','Kapanınca içeride biri kalır sanmıştım. Oysa başka tarafta yol açılıyor.'],['SEN','Bunu ilk gördüğümde neden anlayamadım?'],['ANLATICI','Bir şeyi görmekle, neye mal olacağını anlamak aynı anda olmuyor.']],
+ [['SEN','Yağmur her şeyi silmemiş. İpin düğümü hâlâ sıkı.'],['SEN','Bunu aceleyle bağlamamışsın.'],['ANLATICI','Işığın yanında kuru kalmış küçük bir tahta parçası var.']],
+ [['DAMLA','Şu feneri biraz sağa alalım. Aptullah gider soldaki karanlığı yol sanır.'],['DAMLA','Haksızlık etmeyeyim; ben de demin aynı yere baktım.'],['ANLATICI','Damla son tahtayı ayağıyla yokluyor, sağlam olduğundan emin oluyor.']],
+ [['DAMLA','Not kısa olsun. Uzun yazarsam burada bekler okur.'],['DAMLA','Ama benim de ona söyleyecek çok şeyim var.'],['ANLATICI','Kâğıdı katlıyor. Bir cümleyi içine, birini yolun üzerine bırakıyor.']],
+ [['DAMLA','Ben ayran söylemeyeceğim.'],['SEN','Sonra benimkinden içeceksin.'],['DAMLA','Bir yudum.'],['SEN','O yudumun ölçeğini yıllardır çözemiyorum.']],
+ [['SEN','Bir ayran, iki kişinin bıraktığı fincan izi gibi masanın ortasında.'],['DAMLA','Ben sipariş vermedim ki.'],['SEN','Evet. Sipariş bende, kullanım ortak.']],
+ [['SEN','Garson masayı toplarken ayranı hep ortaya koyuyor.'],['DAMLA','Adam sistemi anlamış.'],['SEN','Ben hâlâ yönetmelik bekliyorum.']],
+ caffelab.walk,
+ [['SEN','Şu ışık Bartın’dan, bu masa Ankara’dan. Buraya her şey sığmış.'],['SEN','Birlikte geçirdiğimiz günler bitince ortadan kaybolmamış.'],['ANLATICI','Yalnızca onları birbirine bağlayan yollar çözülüyor.']],
+ [['DAMLA','Bu tarafta bir kapı daha var. Açılırsa dönmem gerekmeyecek.'],['SEN','Sesini duyuyorum. Bu kez sana yetişmeyi değil, yolu tamamlamayı düşünüyorum.'],['ANLATICI','Aynı mekanizmanın iki ucunda, iki ayrı el çalışıyor.']],
+ [['SEN','Bankı, sofrayı, kahveyi yanımda götürebilirim. Seni buraya bağlayamam.'],['SEN','Dostuuum. Kapının ardında kendi yolun var.'],['ANLATICI','Son kol, bir kez daha aynı yere döndürmek için değil, çıkmak için bekliyor.']]
+];
+LEVELS.forEach((d,i)=>{d.walk=walkTalks[i];});
+LEVELS[9].intro.splice(3,0,['DAMLA','Ayran istemiyorum.'],['SEN','Ben bir tane alayım. Sen zaten birazdan benimkinden içersin.'],['DAMLA','Bir yudumdan sipariş olmaz, dostuuum.']);
+LEVELS[10].intro.push(['ANLATICI','Masanın ortasında yine tek ayran var. Aynı küçük alışkanlık, başka bir akşam.']);
+LEVELS[11].outro.splice(1,0,['SEN','Ayranın yarısı kalmış. Bu kez kim ne kadar içti diye hesap yapmıyorum.']);
 if(typeof module!=='undefined')module.exports={LEVELS,WORLDS};

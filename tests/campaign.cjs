@@ -7,18 +7,22 @@ const nodes={},events={},stored={};const document={getElementById:id=>nodes[id]|
 const window={addEventListener:(n,f)=>events[n]=f,devicePixelRatio:1};
 const context={document,window,localStorage:{getItem:k=>stored[k]||null,setItem:(k,v)=>stored[k]=v},HTMLInputElement:class{},innerWidth:844,innerHeight:390,requestAnimationFrame(){},setTimeout(){return 0;},clearTimeout(){},console};
 if(process.env.ROAD_LEGACY)stored['sana-gelen-yol-v1']=JSON.stringify({version:1,current:6,unlocked:8,completed:[0,1,2,3,4,5],memories:['0:memory0','0:memory1','1:memory2'],seen:[],states:{6:{checkpoint:3}},volume:.35});
-vm.createContext(context);vm.runInContext(fs.readFileSync('story.js','utf8'),context);vm.runInContext(fs.readFileSync('levels.js','utf8'),context);vm.runInContext(fs.readFileSync('engine.js','utf8'),context);vm.runInContext(fs.readFileSync('music.js','utf8'),context);vm.runInContext(fs.readFileSync('characters.js','utf8'),context);
-const code=fs.readFileSync('game.js','utf8').replace(/\}\)\(\);\s*$/,`window.test={startLevel,finishScene,interact,update,pause,closeModal,persist,respawn,home,render,showScene,complete,sceneMenu,get:()=>({mode,world,player,state,save,checkpoint,actor,scene,index}),at:(o)=>{near=o;player.x=o.x-13;player.y=o.y-58;},phase:(n)=>state.phase=n,view:(x)=>{camera=x;clock=2},line:()=>sceneLine};})();`);
+vm.createContext(context);for(const f of ['progress.js','puzzles.js','cinema.js'])vm.runInContext(fs.readFileSync(f,'utf8'),context);vm.runInContext(fs.readFileSync('story.js','utf8'),context);vm.runInContext(fs.readFileSync('levels.js','utf8'),context);vm.runInContext(fs.readFileSync('engine.js','utf8'),context);vm.runInContext(fs.readFileSync('music.js','utf8'),context);vm.runInContext(fs.readFileSync('characters.js','utf8'),context);
+const code=fs.readFileSync('game.js','utf8').replace(/\}\)\(\);\s*$/,`window.test={startLevel,finishScene,interact,update,pause,closeModal,persist,respawn,home,render,showScene,complete,sceneMenu,finishFilm,advanceFilm,nextLine,selectedTrack,updateChallenge,endingMenu,get:()=>({mode,world,player,state,save,checkpoint,actor,scene,index,film,challenge}),at:(o)=>{near=o;player.x=o.x-13;player.y=o.y-58;},phase:(n)=>state.phase=n,view:(x)=>{camera=x;clock=2},line:()=>sceneLine};})();`);
 vm.runInContext(code,context);const t=window.test;
-if(process.env.ROAD_LEGACY){const v=t.get().save;assert.equal(v.current,6);assert.equal(v.unlocked,8);assert.equal(v.completed.length,6);assert.equal(v.memories.length,2);assert.equal(v.states[6].checkpoint,0);t.startLevel(6,true);assert.equal(t.get().checkpoint,0);assert.equal(t.get().index,6);console.log('PASS: v3 save migrates to v4, preserving chapters and unique memories with safe respawn');process.exit(0);}
-for(let i=0;i<15;i++){
+if(process.env.ROAD_LEGACY){const v=t.get().save;assert.equal(v.current,6);assert.equal(v.unlocked,8);assert.equal(v.completed.length,6);assert.equal(v.memories.length,2);assert.equal(v.states[6].checkpoint,0);t.startLevel(6,true);assert.equal(t.get().checkpoint,0);assert.equal(t.get().index,6);t.startLevel(0);for(let n=0;n<5;n++)t.nextLine();assert.equal(t.get().mode,'film');assert.equal(t.get().film.kind,'rupture');t.advanceFilm(4);t.render();const elapsed=t.get().film.time;t.pause();t.advanceFilm(3);assert.equal(t.get().film.time,elapsed);t.closeModal();t.advanceFilm(10);assert.equal(t.get().mode,'scene');assert.equal(t.line(),5);assert.ok(t.get().save.seen.includes('0:rupture'));t.finishScene();
+console.log('PASS: v3 save migrates to v5, preserving chapters and unique memories with safe respawn');process.exit(0);}
+for(let i=0;i<16;i++){
  t.startLevel(i);assert.equal(t.get().mode,'scene');t.finishScene();
  const s=t.get();
  for(const a of s.world.route){t.view(a.x);t.render();}
  for(const o of s.world.objects.filter(o=>o.key)){
   if(o.type==='align')t.phase(1);if(o.type==='table')t.phase(0);
   t.at(o);t.interact();
-  if(o.type==='table'){assert.equal(t.get().mode,'modal');document.getElementById('dishLeft').onclick();const row=document.getElementById('modalBody').children.at(-1);row.children[0].onclick();}
+  if(o.type==='table'){assert.equal(t.get().mode,'modal');document.getElementById('dishLeft').onclick();document.getElementById('drinkLeft').onclick();const row=document.getElementById('modalBody').children.at(-1);row.children[0].onclick();}
+  if(o.type==='coffee'){for(const id of ['coffeeDrink','coffeeMilk','coffeeCups'])document.getElementById(id).onclick();document.getElementById('modalBody').children.at(-1).children[0].onclick();}
+  if(o.type==='brew'||o.type==='dial'){const count=o.type==='brew'?2:1;for(let n=0;n<count;n++){document.getElementById('timingStart').onclick();t.get().challenge.time=.85/2.4;document.getElementById('timingStop').onclick();}}
+  if(t.get().mode==='film')t.finishFilm();
   assert.equal(t.get().mode,'scene');t.finishScene();
  }
  assert.ok(s.world.objects.filter(o=>o.key).every(o=>t.get().state.tasks[o.key]));
@@ -26,11 +30,11 @@ for(let i=0;i<15;i++){
  const m=s.world.objects.find(o=>o.type==='memory');t.at(m);t.interact();assert.equal(t.get().mode,'scene');t.finishScene();
  assert.ok(t.get().save.memories.includes(i+':'+m.id));
  const x=s.world.objects.find(o=>o.type==='exit');t.at(x);t.interact();
- if(i===14){assert.equal(t.get().mode,'modal');const row=document.getElementById('modalBody').children.at(-1);row.children[0].onclick();}
- assert.equal(t.get().mode,'scene');t.finishScene();assert.ok(t.get().save.completed.includes(i));
+ if(i===15){assert.equal(t.get().mode,'modal');const row=document.getElementById('modalBody').children.at(-1);row.children[0].onclick();}
+ assert.equal(t.get().mode,'scene');t.finishScene();assert.ok(t.get().save.completed.includes(i));if(i<15){assert.equal(t.get().mode,'film');for(const time of [0,3,6,9,10.5]){t.get().film.time=time;t.render();}t.finishFilm();}else{assert.equal(t.get().mode,'ending');assert.equal(t.selectedTrack(),'daylight');assert.equal(nodes.soundtrack.paused,false);t.endingMenu();assert.equal(nodes.soundtrack.paused,false);t.closeModal();t.pause();assert.equal(nodes.soundtrack.paused,true);t.closeModal();}
  t.startLevel(i,true);if(t.get().mode==='scene')t.finishScene();assert.ok(t.get().world.required.every(k=>t.get().state.tasks[k]));t.pause();assert.equal(t.get().mode,'modal');t.closeModal();assert.equal(t.get().mode,'play');
 }
-assert.equal(t.get().save.completed.length,15);assert.equal(t.get().save.unlocked,14);assert.equal(t.get().save.seen.length,30);
+assert.equal(t.get().save.completed.length,16);assert.equal(t.get().save.unlocked,15);assert.equal(t.get().save.seen.length,47);
 t.startLevel(1);t.finishScene();t.get().player.x=t.get().world.checkpoints[1].x+1;t.get().player.y=t.get().world.checkpoints[1].y;t.get().player.ground=t.get().world.checkpoints[1].platform;t.update(1/120);assert.equal(t.get().checkpoint,1);t.persist();t.startLevel(1,true);assert.equal(t.get().checkpoint,1);assert.ok(t.get().player.x>1000);
 const before=t.get().player.x;t.pause();t.update(1/60);assert.equal(t.get().player.x,before);t.closeModal();document.hidden=true;events.visibilitychange();assert.equal(t.get().mode,'modal');document.hidden=false;t.closeModal();
 t.respawn();assert.equal(t.get().checkpoint,1);
@@ -39,4 +43,15 @@ t.startLevel(0);t.pause();t.sceneMenu('scene');const archived=document.getElemen
 t.startLevel(0);let prevented=false;const beforeLine=t.line();events.keydown({code:'Enter',target:{},preventDefault(){prevented=true;}});assert.equal(t.line(),beforeLine+1);assert.ok(prevented);t.finishScene();
 // Repeated interaction cannot reopen a consumed object or duplicate a memory.
 const first=t.get().world.objects.find(o=>o.key);t.at(first);t.interact();t.finishScene();t.interact();assert.equal(t.get().mode,'play');
-console.log('PASS: 15 chapters, distinct chapter tasks and physical crate puzzles, table puzzle, final confirmation, 30 replay entries, progress and checkpoint reload, pause, visibility and respawn');
+// Timing challenges must remain recoverable after a miss or an app switch.
+t.startLevel(12);t.finishScene();
+const machine=t.get().world.objects.find(o=>o.type==='brew');t.at(machine);t.interact();assert.equal(t.get().mode,'play');assert.equal(t.get().challenge,null);
+t.get().state.tasks['latte-order']=true;t.get().state.tasks.pressure=true;t.interact();assert.equal(t.get().mode,'modal');
+nodes.timingStart.onclick();nodes.timingStop.onclick();assert.equal(t.get().challenge.hits,0);assert.ok(!t.get().state.tasks['latte-brew']);
+t.get().challenge.time=.85/2.4;nodes.timingStop.onclick();assert.equal(t.get().challenge.hits,1);assert.equal(t.get().challenge.paused,true);
+nodes.timingStart.onclick();t.updateChallenge(.1);const challengeTime=t.get().challenge.time;document.hidden=true;events.visibilitychange();t.updateChallenge(1);assert.equal(t.get().challenge.time,challengeTime);assert.equal(t.get().challenge.paused,true);document.hidden=false;assert.equal(nodes.timingStop.disabled,true);nodes.timingStart.onclick();t.get().challenge.time=.85/2.4;nodes.timingStop.onclick();assert.ok(t.get().state.tasks['latte-brew']);assert.equal(t.get().mode,'scene');t.finishScene();
+// A film paused in the archive resumes at the same time and returns to its next chapter.
+t.startLevel(2);t.finishScene();t.complete();t.finishScene();t.advanceFilm(4);const originalFilm=t.get().film;t.pause();t.sceneMenu('film');nodes.modalBody.children[0].onclick();t.finishScene();t.closeModal();assert.equal(t.get().film,originalFilm);assert.equal(t.get().film.time,4);assert.equal(t.get().mode,'film');t.finishFilm();assert.equal(t.get().mode,'modal');
+// Opening replay is available even without restarting a chapter.
+t.home();nodes.openingReplay.onclick();for(let n=0;n<5;n++)t.nextLine();assert.equal(t.get().film.kind,'rupture');t.advanceFilm(4);t.pause();const filmTime=t.get().film.time;t.advanceFilm(2);assert.equal(t.get().film.time,filmTime);t.closeModal();t.advanceFilm(10);assert.equal(t.get().mode,'scene');assert.equal(t.line(),5);assert.ok(t.get().save.seen.includes('0:rupture'));t.finishScene();assert.equal(t.get().mode,'home');
+console.log('PASS: 16 chapters, animated rupture, skippable interludes, final music, distinct chapter tasks and physical crate puzzles, table puzzle, final confirmation, 47 chapter/film replay entries, progress and checkpoint reload, pause, visibility and respawn');
