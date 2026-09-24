@@ -13,7 +13,7 @@ Yazar: **İsmet Özel**. Kaynaklar 23 Eylül 2026'da kontrol edildi. Son geçitt
 
 ## Bir Dizenin Öte Yanı · 16. bölüm
 
-Dört soru başlangıcı ve doğru devamları kullanıcı tarafından sağlandı. Eser adları ve dizeler kaynaklardan doğrulandı. Diğer seçenekler aynı yazarın/sanatçının farklı eserlerinden kısa alıntılardır; soru metninin gerçek devamı olarak sunulmaz. Yanlış cevap seçildiğinde geldiği eser açıklanır. Emre Fel’in kaydı oyuna yüklenmedi; burada yalnızca metin bulmacası kullanılır.
+Beş soru başlangıcı ve doğru devamları kullanıcı tarafından sağlandı. Eser adları ve dizeler kaynaklardan doğrulandı. Diğer seçenekler aynı yazarın/sanatçının farklı eserlerinden kısa alıntılardır; soru metninin gerçek devamı olarak sunulmaz. Yanlış cevap seçildiğinde geldiği eser açıklanır. Emre Fel ve Murat Kekilli kayıtları oyuna yüklenmedi; burada yalnızca metin bulmacası kullanılır.
 
 | Soru | Doğru devamın eseri | Diğer seçeneklerin eserleri |
 |---|---|---|
@@ -21,6 +21,9 @@ Dört soru başlangıcı ve doğru devamları kullanıcı tarafından sağlandı
 | 2 | İsmet Özel — [Karlı Bir Gece Vakti Bir Dostu Uyandırmak](https://istanbul.meb.gov.tr/dergi/dergi9/istanbuldergisi9sayi.pdf) | [Amentü](https://anadolusairleri.com/siir-sair/amentu) · [Karoon](https://kutuphane.kku.edu.tr/tez/206069.pdf) |
 | 3 | İsmet Özel — [Karoon](https://kutuphane.kku.edu.tr/tez/206069.pdf) | [Karlı Bir Gece Vakti Bir Dostu Uyandırmak](https://istanbul.meb.gov.tr/dergi/dergi9/istanbuldergisi9sayi.pdf) · [Yaşamak Umrumdadır](https://siirhane.net/ismetozel/yasamak-umrumdadir-siiri-ismet-ozel/) |
 | 4 | Emre Fel — [Sana El Pençe Durmam](https://www.shazam.com/song/1740357540/sana-el-penc3a7e-durmam) | [Naçar](https://www.shazam.com/song/1763034833/nac3a7ar) · [Rüya](https://www.shazam.com/tr-tr/song/1718893344/rc3bcya) |
+| 5 | Murat Kekilli — [Kara Gözlüm](https://www.youtube.com/watch?v=BIzMEZIUBnE) | [Eşek Gözlüm](https://www.shazam.com/song/860573768/e%C5%9Fek-g%C3%B6zl%C3%BCm) · [Aklıma Gelmeyecektin](https://www.myrepertuar.com/9660/murat-kekilli/aklima-gelmeyecektin-sarki-sozu.html) |
+
+Beşinci sorunun başlangıcı ve doğru devamı kullanıcı tarafından 24 Eylül 2026’da verildi. Diğer iki kısa seçeneğin kaynağı aynı gün kontrol edildi; önceki dört soru değiştirilmedi.
 
 ## Caffelab’daki felsefe konuşması
 

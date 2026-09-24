@@ -1,8 +1,16 @@
-# Sana Gelen Yol — v8
+# Sana Gelen Yol — v9
 
-[Oyunu aç](https://camabdullah.github.io/asdf/?v=8)
+[Oyunu aç](https://camabdullah.github.io/asdf/?v=9)
 
 Dokunmatik, yandan ilerleyen 2D hikâye ve çevre bulmacası oyunu. 6 dünya, 19 bölüm. Yatay iPhone ekranı hedeflenir; masaüstünde de çalışır. Bölüm süreleri oyuncu testleriyle ölçülmedi; 1,5–2 saatlik süre bir tasarım hedefidir.
+
+## v9 güncellemesi
+
+- Yukarıdan düşen parçaların aralığı 4,8 saniyeden 3,2 saniyeye indi; aynı sürede %50 daha sık düşer. Düşüş öncesindeki 0,8 saniyelik uyarı korunur.
+- Buhar aynı 4 saniyelik döngüde artık 1,4 yerine 2,4 saniye açıktır. 0,7 saniye önceden haber verir; kalan 1,6 saniye geçiş için güvenlidir.
+- Ayna/ağırlık/sıralama, yemek/kahve, ritim ve kelime bulmacalarında müzik düşük seviyede sürer. Son geçidi kapatma kararında da devam eder. Duraklatma ve gizlenen sekme sesi keser; bulmaca sırasında görünür sekmeye dönülünce kaldığı yerden sürer.
+- Kelime yolunda beşinci soru: Murat Kekilli — Kara Gözlüm. Kullanıcının verdiği başlangıç ve cevap, üç seçenek ve ayrı bir köprüyle işlendi. Sonuna eklenen üç platform eski kontrol noktalarını yerinden oynatmaz.
+- Koru’daki açılış artık makarna/salata, sebzeli sipariş ve patates kızartması konuşmasıdır. Kesilen cümle ve finaldeki tam hatıra birbiriyle tutarlıdır.
 
 ## v8 güncellemesi
 
@@ -20,7 +28,7 @@ Dokunmatik, yandan ilerleyen 2D hikâye ve çevre bulmacası oyunu. 6 dünya, 19
 - Fotoğrafa dayalı yeni Abdullah portresi; hareketli çizimde koyu geriye taranmış saç, belirgin kaşlar, bağlı bıyık/sakal ve kahverengi kapüşonlu üst. Yeni yakın plan animasyonlarında daha uzun vücut oranları.
 - 8 ayrı mantık düzeneği: aynalı ışık yolları, karşı ağırlıklar, ipuçlarıyla anı/sayfa sıraları. Her birinin tek geçerli çözümü otomatik olarak doğrulanır. Yanlış deneme kapıyı açmaz; yarım yerleşimler kaydedilir.
 - Latte makinesinde üç, halka düzeneğinde iki aşama. Yeşil aralık her aşamada değişir ve önceki sürümden dardır. Hata sadece mevcut düzeneği sıfırlar.
-- Mevcut bölüm güzergâhlarına temalı ayrıntılar ve engeller eklendi. Kepenkler kapanmadan uyarır; düşen parçalar yerlerini önceden gösterir; ışık köprüleri sönmeden geri sayar. Kısa engellerin üzerinden atlanır. 395 zorunlu platform aktarımı vardır.
+- Mevcut bölüm güzergâhlarına temalı ayrıntılar ve engeller eklendi. Kepenkler kapanmadan uyarır; düşen parçalar yerlerini önceden gösterir; ışık köprüleri sönmeden geri sayar. Kısa engellerin üzerinden atlanır. 398 zorunlu platform aktarımı vardır.
 
 ## Oynama
 
@@ -82,6 +90,6 @@ node tests/verses-reels.cjs
 node tests/dreams-logic.cjs
 ```
 
-Kontroller: 19 bölümün görev akışı, 395 platform aktarımı, gizli anılara erişim, her mantık bulmacasının tek çözümü, yanlış cevabın kapıyı açmaması, bekleyen düzeneklerin kaydı, animasyon duraklatma/atlama/yeniden izleme, final müziği, eski kayıt göçü. Tarayıcıda 844×390 yatay ölçüde portre, düğmeler, yeni bulmacalar ve sahneler görsel olarak kontrol edilir. Bu, fiziksel bir iPhone üzerinde performans ölçümü değildir.
+Kontroller: 19 bölümün görev akışı, 398 platform aktarımı, gizli anılara erişim, her mantık bulmacasının tek çözümü, yanlış cevabın kapıyı açmaması, bekleyen düzeneklerin kaydı, animasyon duraklatma/atlama/yeniden izleme, final müziği, eski kayıt göçü. Tarayıcıda 844×390 yatay ölçüde portre, düğmeler, yeni bulmacalar ve sahneler görsel olarak kontrol edilir. Bu, fiziksel bir iPhone üzerinde performans ölçümü değildir.
 
 GitHub Pages main dalından yayınlanır. Yerel qa*.html / qa*-game.js dosyaları ve özgün kişisel fotoğraflar yayın paketi dışındadır.

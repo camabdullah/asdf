@@ -34,8 +34,8 @@ const RoadEngine=(()=>{
  function hazard(h,time){
   if(h.type==='bramble')return {x:h.x-23,y:h.y-25,w:46,h:25,active:true};
   if(h.type==='shutter'){const t=(time+h.offset)%5;return {x:h.x-10,y:h.y-148,w:20,h:148,active:t<2.5,warning:t>=4.2,blocking:true};}
-  if(h.type==='drip'){const t=(time+h.offset)%4.8;return {x:h.x,y:h.y-174+Math.max(0,t-1.8)*195,r:11,active:t>=1.8&&t<2.75,warning:t>=1&&t<1.8};}
-  if(h.type==='steam'){const t=(time+h.offset)%4;return {x:h.x-16,y:h.y-74,w:32,h:74,active:t>=2.05&&t<3.45,warning:t>=1.35&&t<2.05};}
+  if(h.type==='drip'){const t=(time+h.offset)%3.2;return {x:h.x,y:h.y-174+Math.max(0,t-1.35)*195,r:11,active:t>=1.35&&t<2.3,warning:t>=.55&&t<1.35};}
+  if(h.type==='steam'){const t=(time+h.offset)%4;return {x:h.x-16,y:h.y-74,w:32,h:74,active:t>=1.35&&t<3.75,warning:t>=.65&&t<1.35};}
   const angle=Math.sin(time*1.7+h.offset)*.65;return {x:h.x+Math.sin(angle)*112,y:h.y-128+Math.cos(angle)*112,r:15,active:true};
  }
  function touches(p,h){if(h.r){const x=Math.max(p.x,Math.min(h.x,p.x+p.w)),y=Math.max(p.y,Math.min(h.y,p.y+p.h));return (x-h.x)**2+(y-h.y)**2<h.r*h.r;}return p.x+p.w>h.x&&p.x<h.x+h.w&&p.y+p.h>h.y&&p.y<h.y+h.h;}

@@ -1,5 +1,4 @@
 'use strict';
-// Authored dialogue. Dreams alter Abdullah’s perception, never the established past.
 const WORLDS = [
  {
   "name": "Ankara / Koru",
@@ -103,15 +102,27 @@ const LEVELS = [
    ],
    [
     "DAMLA",
-    "Bay Aptullah çok bilmiş. Sen de Barbeküs diyeceksin; ama gidince yine menüye bakarsın."
+    "Bay Aptullah çok bilmiş… Dostuuum, Barbeküs’ünü tamamen makarna mı söyleyeceksin, yoksa salatalı mı?"
    ],
    [
     "ABDULLAH",
-    "Elbette bakarım. İhtimallere bir hürmet borcumuz var. Belki bu sefer…"
+    "Tamamen makarna, dostuuum; salatayla aramızda henüz bir sulh tesis edemedik. Sen sebzeli söyleyeceksin, biliyorum."
+   ],
+   [
+    "DAMLA",
+    "Aptullah, patates kızartması da var mı? Patates kızartması?"
+   ],
+   [
+    "ABDULLAH",
+    "Var elbette. Fakat senin siparişinin hudutları her cümlede biraz daha genişliyor."
+   ],
+   [
+    "DAMLA",
+    "Dostuuum, o patatesler…"
    ],
    [
     "ANLATICI",
-    "Damla gülerek sana dönüyor. Vereceği cevabı duyamadan ayaklarınızın altındaki yol bir kâğıt gibi yırtılıyor."
+    "Damla gülerek sana dönüyor. Cümlesinin devamını duyamadan ayaklarınızın altındaki yol bir kâğıt gibi yırtılıyor."
    ],
    [
     "ABDULLAH",
@@ -159,7 +170,8 @@ const LEVELS = [
     "ABDULLAH",
     "Var. O merdivenlerin sonunda sesin varsa, yorgunluğa itirazım yok."
    ]
-  ]
+  ],
+  "ruptureAfter": 7
  },
  {
   "title": "Yolun Bittiği Yer",
@@ -965,11 +977,11 @@ const LEVELS = [
   "outro": [
    [
     "DAMLA",
-    "Yine menüye ciddi ciddi bakıyorsun."
+    "Salataya yine dokunmamışsın. Patateslere bu kadar mesafeli davranmıyorsun ama."
    ],
    [
     "ABDULLAH",
-    "Belki Barbeküs fikrini değiştirmiştir. Karşı tarafın iradesini de yoklamak lâzım."
+    "İnsan her yeşilliği sevmek zorunda değil. Seninle aynı sofraya oturmak hususunda ise hiçbir tereddüdüm yok."
    ],
    [
     "ANLATICI",
@@ -1236,7 +1248,7 @@ const LEVELS = [
   "actor": "sen",
   "mechanic": "verse",
   "seed": 48,
-  "goal": "Üç şiirin ve bir şarkının devamını bul. Dört doğru cevapla dört köprüyü aç.",
+  "goal": "Üç şiirin ve iki şarkının devamını bul. Beş doğru cevap ve sayfaların sırasıyla bütün köprüleri aç.",
   "intro": [
    [
     "ANLATICI",
@@ -1274,7 +1286,11 @@ const LEVELS = [
    ],
    [
     "DAMLA",
-    "Şarkının devamını da hatırladın. Şimdi gerçekten yola devam edebiliriz, dostuuum."
+    "Bir şarkıyı hatırladık. Sayfaların ötesinde bir tane daha var; hemen gitmek yok, dostuuum."
+   ],
+   [
+    "ABDULLAH",
+    "Bir sualin cevabı bazen tek bir insandır. Bu şarkıyı hatırlayınca, sesinin kelimelerden evvel geldiğini anlıyorum."
    ]
   ],
   "outro": [
@@ -1488,19 +1504,31 @@ const LEVELS = [
    ],
    [
     "DAMLA",
-    "Bay Aptullah çok bilmiş. Sen de Barbeküs diyeceksin; ama gidince yine menüye bakarsın."
+    "Bay Aptullah çok bilmiş… Dostuuum, Barbeküs’ünü tamamen makarna mı söyleyeceksin, yoksa salatalı mı?"
    ],
    [
     "ABDULLAH",
-    "Elbette bakarım. İhtimallere bir hürmet borcumuz var. Belki bu sefer…"
+    "Tamamen makarna, dostuuum; salatayla aramızda henüz bir sulh tesis edemedik. Sen sebzeli söyleyeceksin, biliyorum."
    ],
    [
     "DAMLA",
-    "Bu sefer de Barbeküs. Hadi kalk, dostuuum."
+    "Aptullah, patates kızartması da var mı? Patates kızartması?"
    ],
    [
     "ABDULLAH",
-    "Pekâlâ. Fakat menüye son bir nezaket ziyareti yapacağım."
+    "Var elbette. Fakat senin siparişinin hudutları her cümlede biraz daha genişliyor."
+   ],
+   [
+    "DAMLA",
+    "Dostuuum, o patatesler…"
+   ],
+   [
+    "DAMLA",
+    "…senin tabağında olsa da bizim sayılır. Ayran gibi."
+   ],
+   [
+    "ABDULLAH",
+    "Demek mülkiyet meselesini de bir tabak patatesle hallettik. İnsanın seninle münazarası hiç bitmiyor, dostuuum."
    ],
    [
     "ANLATICI",
@@ -1528,7 +1556,8 @@ const LEVELS = [
     "ANLATICI",
     "Son kol, bir kez daha aynı yere döndürmek için değil, çıkmak için bekliyor."
    ]
-  ]
+  ],
+  "soloFrom": 12
  }
 ];
 if(typeof module!=='undefined')module.exports={LEVELS,WORLDS};

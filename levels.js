@@ -1,5 +1,4 @@
 'use strict';
-// Individually authored routes. s ground, t pulsing bridge, w swing, l lift, g task gate.
 const ROAD_LAYOUTS = [
  {
   "route": "s,0,442,430 s,55,420,130 w,95,395,108 s,95,370,150 s,65,410,260 g,30,410,210 s,35,410,240 b,60,432,100 s,95,282,170 s,70,345,130 s,65,402,300 s,0,402,240 f,100,425,106 s,110,442,140 w,88,403,116 s,75,360,250 s,65,400,220 s,60,442,350 w,90,402,112 s,90,360,170 f,105,397,102 s,100,442,300 b,90,430,100 s,100,280,200 s,90,352,150 s,85,420,370",
@@ -799,7 +798,7 @@ const ROAD_LAYOUTS = [
   ]
  },
  {
-  "route": "s,0,442,420 w,90,400,110 s,90,350,170 s,80,400,330 g,25,400,180 s,40,350,150 s,80,395,160 s,65,442,340 g,25,442,180 b,75,410,95 s,95,260,180 s,80,330,160 s,80,400,340 g,25,400,190 s,45,370,150 w,100,405,110 s,100,442,340 g,25,442,200 s,50,397,160 f,100,350,100 s,100,400,320 s,75,442,360 g,25,442,180 s,35,420,350",
+  "route": "s,0,442,420 w,90,400,110 s,90,350,170 s,80,400,330 g,25,400,180 s,40,350,150 s,80,395,160 s,65,442,340 g,25,442,180 b,75,410,95 s,95,260,180 s,80,330,160 s,80,400,340 g,25,400,190 s,45,370,150 w,100,405,110 s,100,442,340 g,25,442,200 s,50,397,160 f,100,350,100 s,100,400,320 s,75,442,360 g,25,442,180 s,35,420,350 s,80,380,320 g,25,380,180 s,40,420,360",
   "check": [
    0,
    3,
@@ -808,7 +807,9 @@ const ROAD_LAYOUTS = [
    16,
    20,
    21,
-   23
+   23,
+   24,
+   26
   ],
   "devices": [
    [
@@ -845,6 +846,13 @@ const ROAD_LAYOUTS = [
     "book-order",
     "Sayfaları sırala",
     0
+   ],
+   [
+    24,
+    "verse",
+    "verse4",
+    "Kara Gözlüm’ü tamamla",
+    4
    ]
   ],
   "gates": {
@@ -852,7 +860,8 @@ const ROAD_LAYOUTS = [
    "8": "verse1",
    "13": "verse2",
    "17": "verse3",
-   "22": "book-order"
+   "22": "book-order",
+   "25": "verse4"
   },
   "hazards": [
    [
@@ -869,7 +878,7 @@ const ROAD_LAYOUTS = [
    ]
   ],
   "memory": 10,
-  "goal": "Dört kürsüde doğru devamı seç. Her cevap ayrı bir köprüyü açar. Son köprüde dört sayfanın sırasını çöz.",
+  "goal": "Beş kürsüde doğru devamı seç. Her cevap kendi köprüsünü açar. Dört eski sayfanın sırasını da çöz.",
   "details": [
    "waymark"
   ],
